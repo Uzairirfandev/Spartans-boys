@@ -11,26 +11,18 @@ module.exports = {
       fontFamily: {
         poppins: ['var(--font-poppins)', 'sans-serif'],
         lato: ['var(--font-lato)', 'sans-serif'],
+      
       },
-      colors: {
-        // Light theme colors
-        bgLight: '#FBF3F2',
-        cardBgLight: '#FFFFFF',
-        textLight: '#000000',
-        grayTextLight: '#6B7280',
-        
-        // Dark theme colors
-        bgDark: '#000000',
-        cardBgDark: '#1E1E1E',
-        textDark: '#E5E5E5',
-        grayTextDark: '#9CA3AF',
-        
+      colors: { 
         // Accent colors (work in both themes)
-        primary: '#FA991C',
+        primary: '#00ffea',
         lightPrimary: '#FFBB54',
-        secondary1: '#1C768F',
+        secondary1: '#031216',
         secondary2: '#032539',
-        
+        background1: '#ce1313',
+
+  
+
         // Semantic colors
         border: 'oklch(var(--border) / <alpha-value>)',
         input: 'oklch(var(--input) / <alpha-value>)',
@@ -72,3 +64,4 @@ module.exports = {
     require('tailwindcss-animate'),
   ],
 }
+
