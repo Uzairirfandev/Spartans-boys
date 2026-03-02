@@ -196,22 +196,11 @@ export default function SkillsSection() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/30 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                 
                 {/* Icon */}
-                <motion.div
-                  animate={{
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.5
-                  }}
-                  className="mb-6"
-                >
+                <div className="mb-6">
                   <div className="p-4 rounded-full bg-gradient-to-br from-primary/20 to-white/10 border border-white/20 w-fit">
                     <skill.icon className={`w-8 h-8 md:w-10 md:h-10 text-${skill.color}-400`} />
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Content */}
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
