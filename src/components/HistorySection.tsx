@@ -7,47 +7,47 @@ import { Trophy, Target, Award, Crown } from "lucide-react";
 const groundItems = [
   {
     title: "Paragon Stadium",
-    location: "Karachi, Pakistan",
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    location: "lahore",
+    image: "https://content-cdn.zameen.com/Paragon_City_Zameen_com_7f2bf9822a.jpg",
     capacity: "25,000",
     established: "2010",
     stats: {
       mostRuns: {
-        name: "Babar Azam",
+        name: "Barry",
         value: "1,245 runs",
         matches: "18 innings"
       },
       mostWickets: {
-        name: "Shaheen Afridi",
+        name: "Berry",
         value: "52 wickets",
         matches: "14 matches"
       },
       mostManOfMatch: {
-        name: "Mohammad Rizwan",
+        name: "Hussnain",
         value: "5 awards",
         matches: "22 matches"
       }
     }
   },
   {
-    title: "Ashiayan Stadium",
-    location: "Lahore, Pakistan",
-    image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    title: "Ashiyana Stadium",
+    location: "Lahore",
+    image: "https://www.skymarketing.com.pk/wp-content/uploads/2022/05/aashiana-housing-scaled.jpg",
     capacity: "20,000",
     established: "2012",
     stats: {
       mostRuns: {
-        name: "Fakhar Zaman",
+        name: "Husnain",
         value: "1,890 runs",
         matches: "24 innings"
       },
       mostWickets: {
-        name: "Wahab Riaz",
+        name: "Hammad",
         value: "48 wickets",
         matches: "16 matches"
       },
       mostManOfMatch: {
-        name: "Shadab Khan",
+        name: "Ahmed",
         value: "4 awards",
         matches: "28 matches"
       }
@@ -55,23 +55,23 @@ const groundItems = [
   },
   {
     title: "Chachu Wali Stadium",
-    location: "Rawalpindi, Pakistan",
-    image: "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    location: "lahore",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/21/28/84/bedian-spins-cricket.jpg",
     capacity: "15,000",
     established: "2015",
     stats: {
       mostRuns: {
-        name: "Azhar Ali",
+        name: "Ahmed",
         value: "1,567 runs",
         matches: "20 innings"
       },
       mostWickets: {
-        name: "Yasir Shah",
+        name: "Berry",
         value: "45 wickets",
         matches: "12 matches"
       },
       mostManOfMatch: {
-        name: "Sarfaraz Ahmed",
+        name: "Saeed",
         value: "3 awards",
         matches: "19 matches"
       }
@@ -79,23 +79,23 @@ const groundItems = [
   },
   {
     title: "Askari 11 Stadium",
-    location: "Multan, Pakistan",
-    image: "https://images.unsplash.com/photo-1589802829985-817e47b9ce0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    location: "lahore",
+    image: "https://i.ytimg.com/vi/BMma6mkqDn8/sddefault.jpg",
     capacity: "18,000",
     established: "2013",
     stats: {
       mostRuns: {
-        name: "Shan Masood",
+        name: "UZAIR",
         value: "1,234 runs",
         matches: "16 innings"
       },
       mostWickets: {
-        name: "Sohail Khan",
+        name: "BILAL",
         value: "38 wickets",
         matches: "11 matches"
       },
       mostManOfMatch: {
-        name: "Imam-ul-Haq",
+        name: "AMIR",
         value: "3 awards",
         matches: "15 matches"
       }
@@ -109,17 +109,17 @@ const groundItems = [
     established: "2018",
     stats: {
       mostRuns: {
-        name: "Umar Gul",
+        name: "NOUMAN",
         value: "890 runs",
         matches: "14 innings"
       },
       mostWickets: {
-        name: "Imran Khan Jr",
+        name: "Saif",
         value: "42 wickets",
         matches: "13 matches"
       },
       mostManOfMatch: {
-        name: "Akmal Brothers",
+        name: "HAMZA",
         value: "4 awards",
         matches: "25 matches"
       }

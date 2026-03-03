@@ -104,14 +104,10 @@ export default function Footer() {
                 <span className="text-white">CRICKET</span>
               </h3>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">PCB</span>
-                </div>
-                <span className="text-sm text-gray-400">Official Team</span>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Home of champions. Producing world-class cricketers and 
-                unforgettable moments since 1952. Passion, pride, and 
+                unforgettable moments since 2016. Passion, pride, and 
                 performance in the gentlemen's game.
               </p>
               
@@ -200,19 +196,6 @@ export default function Footer() {
                 </motion.li>
               ))}
             </ul>
-
-            {/* Upcoming Matches Preview */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-              className="mt-6 p-4 bg-black/30 rounded-lg border border-gray-800"
-            >
-              <p className="text-xs text-gray-400 mb-2">NEXT MATCH</p>
-              <p className="text-sm text-white font-semibold">Pakistan vs India</p>
-              <p className="text-xs text-gray-400">Gaddafi Stadium • 3 days</p>
-            </motion.div>
           </div>
 
           {/* Contact Info */}
@@ -235,7 +218,7 @@ export default function Footer() {
                 className="flex items-center gap-3"
               >
                 <Mail className="w-5 h-5 text-primary" />
-                <span className="text-gray-400">management@pcb.com.pk</span>
+                <span className="text-gray-400">spartanboys@gmail.com</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -245,7 +228,7 @@ export default function Footer() {
                 className="flex items-center gap-3"
               >
                 <Phone className="w-5 h-5 text-primary" />
-                <span className="text-gray-400">+92 42 3571 7241</span>
+                <span className="text-gray-400">+924459400370</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -255,22 +238,10 @@ export default function Footer() {
                 className="flex items-center gap-3"
               >
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-gray-400">Gaddafi Stadium, Lahore</span>
+                <span className="text-gray-400">Nadirabad bedian road lahore cantt</span>
               </motion.div>
             </div>
 
-            {/* Stadium Hours */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7 }}
-              className="mt-6 p-4 bg-black/30 rounded-lg border border-gray-800"
-            >
-              <p className="text-xs text-gray-400 mb-2">STADIUM HOURS</p>
-              <p className="text-sm text-white">Mon-Fri: 9:00 AM - 6:00 PM</p>
-              <p className="text-sm text-white">Match Days: 8:00 AM - 11:00 PM</p>
-            </motion.div>
           </div>
         </div>
 

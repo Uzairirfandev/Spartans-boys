@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
  
 export default function HeroSection() {
   // 40 small fast-moving lines — brighter & sharper
-  const smallLines = Array.from({ length: 40 }, (_, i) => ({
+  const smallLines = Array.from({ length: 70 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     duration: 3 + Math.random() * 3,
     delay: Math.random() * 5,
     direction: Math.random() > 0.5 ? "up" : "down",
     length: 60 + Math.random() * 140,
-    opacity: 0.25 + Math.random() * 0.35,
+    opacity: 0.45 + Math.random() * 0.35,
   }));
 
   // Red smoke particles
@@ -21,20 +21,20 @@ export default function HeroSection() {
     size: 150 + Math.random() * 300,
     duration: 8 + Math.random() * 10,
     delay: Math.random() * 5,
-    opacity: 0.1 + Math.random() * 0.2,
+    opacity: 0.2 + Math.random() * 0.2,
   }));
  
   return (
     <section className="relative min-h-screen w-full flex items-start justify-center overflow-hidden bg-background text-white">
       {/* Full-screen background image */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-[110%] h-[130%]">
         <img
-          src="https://img.freepik.com/premium-photo/vibrant-abstract-spartan-soldier-throwing-spear-with-intense-force_882313-25762.jpg?semt=ais_rp_progressive&w=740&q=80"
+          src="https://img.freepik.com/premium-photo/spartan-warrior-hoodie-design-dark-crimson-gold-tshirt-art_899449-175766.jpg?semt=ais_rp_progressive&w=740&q=80"
           alt="Spartan Warrior Background"
           className="w-full h-full object-cover object-center"
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Red Smoke/Fog Animation from Bottom */}
@@ -48,7 +48,7 @@ export default function HeroSection() {
               width: smoke.size,
               height: smoke.size,
               background: 'radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, rgba(239, 68, 68, 0.1) 50%, transparent 80%)',
-              filter: 'blur(40px)',
+              filter: 'blur(20px)',
               x: '-50%',
             }}
             initial={{
@@ -77,7 +77,7 @@ export default function HeroSection() {
           className="absolute bottom-0 left-0 right-0 h-96"
           style={{
             background: 'linear-gradient(to top, rgba(239, 68, 68, 0.3) 0%, transparent 100%)',
-            filter: 'blur(30px)',
+            filter: 'blur(20px)',
           }}
           animate={{
             opacity: [0.2, 0.5, 0.2],
@@ -153,10 +153,10 @@ export default function HeroSection() {
       </div>
  
       {/* Main Content - Positioned at top */}
-      <div className="relative z-30 w-full max-w-7xl px-6 md:px-12 lg:px-20 pt-32 md:pt-40 lg:pt-48">
+      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-32 md:pt-40 lg:pt-48">
         <div className="flex flex-col">
           {/* Left-aligned Text Content */}
-          <div className="text-left max-w-3xl">
+          <div className="text-left max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -191,7 +191,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 1 }}
-              className="text-2xl md:text-3xl font-light mb-16 tracking-wide drop-shadow-md text-gray-200"
+              className="text-2xl md:text-3xl font-light mb-16 tracking-wide ml-[-39px] drop-shadow-md text-gray-200"
             >
               Forged in Fire • Born to Win
             </motion.p>
@@ -207,7 +207,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.08, boxShadow: "0 0 40px oklch(79.763% 0.16776 75.61 / 0.8)" }}
                 whileTap={{ scale: 0.96 }}
-                className="px-10 py-5 bg-primary/20 border-2 border-primary/60 rounded-xl text-primary font-bold uppercase tracking-widest text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
+                className="px-12 py-4  ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
               >
                 My Career
               </motion.button>

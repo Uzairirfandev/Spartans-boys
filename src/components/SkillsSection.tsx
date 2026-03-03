@@ -13,9 +13,6 @@ import {
   Award,
   Activity,
   TrendingUp,
-  Flame,
-  AwardIcon,
-  Hash,
   Repeat
 } from "lucide-react";
 
@@ -27,13 +24,7 @@ export default function SkillsSection() {
     { current: 0, target: 450, suffix: "" },    // Total Matches
     { current: 0, target: 320, suffix: "" },    // Matches Won
     { current: 0, target: 120, suffix: "" },    // Matches Lost
-    { current: 0, target: 10, suffix: "" },     // Matches Drawn/Tied
-    { current: 0, target: 18500, suffix: "" },  // Total Runs
-    { current: 0, target: 450, suffix: "" },    // Total Sixes
-    { current: 0, target: 1850, suffix: "" },   // Total Fours
-    { current: 0, target: 65, suffix: "" },     // Fifties
-    { current: 0, target: 35, suffix: "" },     // Hundreds
-    { current: 0, target: 420, suffix: "" }     // Wickets
+    { current: 0, target: 10, suffix: "" }      // Matches Drawn/Tied
   ]);
 
   useEffect(() => {
@@ -107,15 +98,6 @@ export default function SkillsSection() {
     { icon: Activity, number: "10", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
   ];
 
-  const battingStats = [
-    { icon: Hash, number: "18,500", label: "Total Runs", suffix: "", color: "purple" },
-    { icon: Flame, number: "450", label: "Total Sixes", suffix: "", color: "orange" },
-    { icon: AwardIcon, number: "1,850", label: "Total Fours", suffix: "", color: "blue" },
-    { icon: Star, number: "65", label: "Fifties (50s)", suffix: "", color: "green" },
-    { icon: Trophy, number: "35", label: "Hundreds (100s)", suffix: "", color: "yellow" },
-    { icon: Target, number: "420", label: "Wickets", suffix: "", color: "red" },
-  ];
-
   return (
     <section ref={ref} className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-br from-background via-black/50 to-background text-white overflow-hidden">
       {/* Background Effects */}
@@ -164,7 +146,7 @@ export default function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-16"
+          className="mb-20"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-10">
             <span className="text-primary">Match</span> Statistics
@@ -199,46 +181,6 @@ export default function SkillsSection() {
                     {Math.floor(counters[i].current)}{stat.suffix}
                   </h3>
                   <p className="text-sm md:text-base text-gray-400 uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Batting & Bowling Statistics */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mb-20"
-        >
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-10">
-            <span className="text-primary">Batting & Bowling</span> Records
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {battingStats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7 + i * 0.1 }}
-                className="text-center bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-xl p-4"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <div className="flex justify-center mb-2">
-                    <stat.icon className={`w-5 h-5 text-${stat.color}-400`} />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-1">
-                    {Math.floor(counters[i + 4].current)}{stat.suffix}
-                  </h3>
-                  <p className="text-xs text-gray-400">
                     {stat.label}
                   </p>
                 </motion.div>
