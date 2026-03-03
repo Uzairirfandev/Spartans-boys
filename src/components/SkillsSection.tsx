@@ -10,7 +10,13 @@ import {
   Heart, 
   Brain,
   Star,
-  Award
+  Award,
+  Activity,
+  TrendingUp,
+  Flame,
+  AwardIcon,
+  Hash,
+  Repeat
 } from "lucide-react";
 
 export default function SkillsSection() {
@@ -18,16 +24,22 @@ export default function SkillsSection() {
   const isInView = useInView(ref, { once: true });
   
   const [counters, setCounters] = useState([
-    { current: 0, target: 900, suffix: "+" },
-    { current: 0, target: 5, suffix: "" },
-    { current: 0, target: 7, suffix: "" },
-    { current: 0, target: 2, suffix: "" }
+    { current: 0, target: 450, suffix: "" },    // Total Matches
+    { current: 0, target: 320, suffix: "" },    // Matches Won
+    { current: 0, target: 120, suffix: "" },    // Matches Lost
+    { current: 0, target: 10, suffix: "" },     // Matches Drawn/Tied
+    { current: 0, target: 18500, suffix: "" },  // Total Runs
+    { current: 0, target: 450, suffix: "" },    // Total Sixes
+    { current: 0, target: 1850, suffix: "" },   // Total Fours
+    { current: 0, target: 65, suffix: "" },     // Fifties
+    { current: 0, target: 35, suffix: "" },     // Hundreds
+    { current: 0, target: 420, suffix: "" }     // Wickets
   ]);
 
   useEffect(() => {
     if (isInView) {
-      const duration = 1000; // 1 second for faster counting
-      const steps = 40; // 40 steps for smooth animation
+      const duration = 1500;
+      const steps = 60;
       const interval = duration / steps;
 
       const timer = setInterval(() => {
@@ -41,56 +53,67 @@ export default function SkillsSection() {
       return () => clearInterval(timer);
     }
   }, [isInView]);
+
   const skills = [
     {
       icon: Target,
-      title: "Finishing",
-      description: "Precision shooting with both feet",
-      level: 95,
+      title: "Batting Technique",
+      description: "Classic cover drives, pulls, and cuts with precision",
+      level: 96,
       color: "red"
     },
     {
       icon: Zap,
-      title: "Speed & Agility",
-      description: "Explosive acceleration and quick direction ",
-      level: 92,
+      title: "Bowling Pace",
+      description: "Consistent 140+ km/h with deadly yorkers",
+      level: 94,
       color: "yellow"
     },
     {
       icon: Brain,
       title: "Game Intelligence",
-      description: "Strategic positioning and decision making",
+      description: "Strategic field placements and match awareness",
       level: 98,
       color: "purple"
     },
     {
       icon: Shield,
-      title: "Physical Strength",
-      description: "Powerful physique and aerial dominance",
-      level: 88,
+      title: "Fielding Excellence",
+      description: "Lightning reflexes and bullet-arm throws",
+      level: 97,
       color: "blue"
     },
     {
       icon: Heart,
       title: "Leadership",
-      description: "Captain mentality and team motivation",
-      level: 96,
+      description: "Captaincy experience and team motivation",
+      level: 95,
       color: "pink"
     },
     {
       icon: Trophy,
-      title: "Trophy Mentality",
-      description: "Clutch performer in crucial moments",
+      title: "Clutch Performance",
+      description: "Rises to occasion in pressure situations",
       level: 99,
       color: "green"
     }
   ];
 
-  const achievements = [
-    { number: "900+", label: "Career Goals" },
-    { number: "5", label: "Ballon d'Or" },
-    { number: "7", label: "League Titles" },
-    { number: "2", label: "European Cups" }
+  // Career Statistics
+  const matchStats = [
+    { icon: Repeat, number: "450", label: "Total Matches", suffix: "", color: "blue" },
+    { icon: Trophy, number: "320", label: "Matches Won", suffix: "", color: "green" },
+    { icon: Shield, number: "120", label: "Matches Lost", suffix: "", color: "red" },
+    { icon: Activity, number: "10", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
+  ];
+
+  const battingStats = [
+    { icon: Hash, number: "18,500", label: "Total Runs", suffix: "", color: "purple" },
+    { icon: Flame, number: "450", label: "Total Sixes", suffix: "", color: "orange" },
+    { icon: AwardIcon, number: "1,850", label: "Total Fours", suffix: "", color: "blue" },
+    { icon: Star, number: "65", label: "Fifties (50s)", suffix: "", color: "green" },
+    { icon: Trophy, number: "35", label: "Hundreds (100s)", suffix: "", color: "yellow" },
+    { icon: Target, number: "420", label: "Wickets", suffix: "", color: "red" },
   ];
 
   return (
@@ -99,6 +122,10 @@ export default function SkillsSection() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        
+        {/* Cricket-specific background elements */}
+        <div className="absolute top-1/2 left-0 w-32 h-32 border-2 border-primary/10 rounded-full -translate-x-1/2" />
+        <div className="absolute bottom-20 right-10 w-20 h-20 border-2 border-primary/20 rounded-full" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -117,8 +144,8 @@ export default function SkillsSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-black mb-6"
           >
-            <span className="text-primary">Elite</span>{" "}
-            <span className="text-white">Skills</span>
+            <span className="text-primary">Cricket</span>{" "}
+            <span className="text-white">Statistics</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -127,47 +154,97 @@ export default function SkillsSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto"
           >
-            Mastering every aspect of the beautiful game with precision and passion
+            Complete career statistics across all formats - Test, ODI, and T20
           </motion.p>
         </motion.div>
 
-        {/* Achievement Numbers */}
+        {/* Match Statistics */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
+          className="mb-16"
         >
-          {achievements.map((achievement, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 + i * 0.1 }}
-              className="text-center"
-            >
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-10">
+            <span className="text-primary">Match</span> Statistics
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {matchStats.map((stat, i) => (
               <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.3
-                }}
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 + i * 0.1 }}
+                className="text-center bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
               >
-                <h3 className="text-4xl md:text-5xl font-black text-primary mb-2">
-                  {Math.floor(counters[i].current)}{counters[i].suffix}
-                </h3>
-                <p className="text-sm md:text-base text-gray-400 uppercase tracking-wider">
-                  {achievement.label}
-                </p>
+                <motion.div
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.2
+                  }}
+                >
+                  <div className="flex justify-center mb-3">
+                    <div className="p-3 rounded-full bg-primary/20 border border-primary/30">
+                      <stat.icon className={`w-6 h-6 text-${stat.color}-400`} />
+                    </div>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-black text-white mb-2">
+                    {Math.floor(counters[i].current)}{stat.suffix}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400 uppercase tracking-wider">
+                    {stat.label}
+                  </p>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Batting & Bowling Statistics */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mb-20"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-10">
+            <span className="text-primary">Batting & Bowling</span> Records
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {battingStats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 + i * 0.1 }}
+                className="text-center bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-xl p-4"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <div className="flex justify-center mb-2">
+                    <stat.icon className={`w-5 h-5 text-${stat.color}-400`} />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-black text-white mb-1">
+                    {Math.floor(counters[i + 4].current)}{stat.suffix}
+                  </h3>
+                  <p className="text-xs text-gray-400">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Skills Grid */}
@@ -179,7 +256,7 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ 
-                delay: 1 + i * 0.1,
+                delay: 1.2 + i * 0.1,
                 type: "spring",
                 stiffness: 100,
                 damping: 15
@@ -218,7 +295,7 @@ export default function SkillsSection() {
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
                       transition={{ 
-                        delay: 1.5 + i * 0.1,
+                        delay: 1.7 + i * 0.1,
                         duration: 1.5,
                         ease: "easeOut"
                       }}
@@ -259,16 +336,16 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 2 }}
+          transition={{ duration: 1, delay: 2.2 }}
           className="text-center mt-20"
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border-2 border-primary/50 rounded-xl text-primary font-bold uppercase tracking-wider text-base hover:bg-primary/20 hover:border-primary/70 transition-all shadow-lg shadow-primary/20 cursor-pointer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border-2 border-primary/50 rounded-xl text-white font-bold uppercase tracking-wider text-base hover:bg-primary/20 hover:border-primary/70 transition-all shadow-lg shadow-primary/20 cursor-pointer"
           >
-            <Trophy className="w-5 h-5" />
-            View Complete Career Stats
+            <TrendingUp className="w-5 h-5" />
+            View Complete Career Analysis
           </motion.div>
         </motion.div>
       </div>

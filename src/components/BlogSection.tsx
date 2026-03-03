@@ -1,48 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Youtube, Play, Upload } from "lucide-react";
 import Link from "next/link";
-
-const blogPosts = [
-  {
-    slug: "cricket-journey",
-    title: "My Journey to Professional Cricket",
-    excerpt: "From street cricket in Karachi to international stadiums – the real story behind the grind, failures, and breakthroughs that shaped my cricket career.",
-    date: "Jan 15, 2026",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    category: "Career",
-  },
-  {
-    slug: "cricket-training-secrets",
-    title: "Training Secrets That Changed My Cricket Game",
-    excerpt: "The daily routines, batting drills, and bowling techniques that helped me go from good to elite level performance in cricket.",
-    date: "Dec 28, 2025",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    category: "Training",
-  },
-  {
-    slug: "handling-pressure-cricket",
-    title: "Dealing with Pressure in Big Cricket Matches",
-    excerpt: "How I handle high-stakes cricket games, crowd pressure, and expectations – mindset tips that work under real match pressure.",
-    date: "Nov 10, 2025",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    category: "Mindset",
-  },
-  {
-    slug: "cricket-nutrition",
-    title: "Nutrition That Fuels a Professional Cricketer",
-    excerpt: "My current meal plan, supplements, and fitness strategy that keeps energy high and recovery fast during intense cricket seasons.",
-    date: "Oct 5, 2025",
-    readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1589802829985-817e47b9ce0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    category: "Nutrition",
-  },
-];
+import { dataManager } from "@/lib/data";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -71,6 +33,20 @@ const cardVariants = {
 
 export default function BlogSection() {
   const [showVideoUpload, setShowVideoUpload] = useState(false);
+  const [videos, setVideos] = useState(dataManager.getVideos());
+
+  // Refresh data when component mounts and set up interval for auto-refresh
+  useEffect(() => {
+    // Initial data load
+    setVideos(dataManager.getVideos());
+    
+    // Set up interval to check for data changes every 2 seconds
+    const interval = setInterval(() => {
+      setVideos(dataManager.getVideos());
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-br from-background via-black/50 to-background text-white overflow-hidden">
@@ -188,8 +164,8 @@ export default function BlogSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
         >
-          {blogPosts.map((post, index) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
+          {videos.map((video, index) => (
+            <Link key={video.id} href={`/video/${video.id}`}>
               <motion.article
                 variants={cardVariants}
                 whileHover="hover"
@@ -198,13 +174,13 @@ export default function BlogSection() {
                 {/* Image */}
                 <div className="relative h-40 md:h-48 overflow-hidden flex-shrink-0">
                   <img
-                    src={post.image}
-                    alt={post.title}
+                    src={video.image}
+                    alt={video.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent/30" />
                   <div className="absolute top-3 left-3 px-3 py-1.5 bg-primary/90 text-black text-xs font-bold rounded-full">
-                    {post.category}
+                    {video.category}
                   </div>
                 </div>
 
@@ -213,24 +189,24 @@ export default function BlogSection() {
                   <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
                     <div className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {post.date}
+                      {video.date}
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
+                      {video.readTime}
                     </div>
                   </div>
 
                   <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
+                    {video.title}
                   </h3>
 
                   <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
-                    {post.excerpt}
+                    {video.excerpt}
                   </p>
 
                   <div className="flex items-center text-primary font-medium text-sm group-hover:text-primary/80 transition-colors mt-auto">
-                    Read More
+                    Watch Video
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-2 duration-300" />
                   </div>
                 </div>

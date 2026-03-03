@@ -6,11 +6,11 @@ import { Trophy, Target, Award, Crown } from "lucide-react";
 
 const groundItems = [
   {
-    title: "National Stadium",
+    title: "Paragon Stadium",
     location: "Karachi, Pakistan",
     image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    capacity: "34,000",
-    established: "1955",
+    capacity: "25,000",
+    established: "2010",
     stats: {
       mostRuns: {
         name: "Babar Azam",
@@ -30,11 +30,11 @@ const groundItems = [
     }
   },
   {
-    title: "Gaddafi Stadium",
+    title: "Ashiayan Stadium",
     location: "Lahore, Pakistan",
     image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    capacity: "27,000",
-    established: "1959",
+    capacity: "20,000",
+    established: "2012",
     stats: {
       mostRuns: {
         name: "Fakhar Zaman",
@@ -54,11 +54,11 @@ const groundItems = [
     }
   },
   {
-    title: "Rawalpindi Stadium",
+    title: "Chachu Wali Stadium",
     location: "Rawalpindi, Pakistan",
     image: "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     capacity: "15,000",
-    established: "1992",
+    established: "2015",
     stats: {
       mostRuns: {
         name: "Azhar Ali",
@@ -78,11 +78,11 @@ const groundItems = [
     }
   },
   {
-    title: "Multan Cricket Stadium",
+    title: "Askari 11 Stadium",
     location: "Multan, Pakistan",
     image: "https://images.unsplash.com/photo-1589802829985-817e47b9ce0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    capacity: "30,000",
-    established: "2003",
+    capacity: "18,000",
+    established: "2013",
     stats: {
       mostRuns: {
         name: "Shan Masood",
@@ -102,11 +102,11 @@ const groundItems = [
     }
   },
   {
-    title: "Arbab Niaz Stadium",
+    title: "Phase 8 Stadium",
     location: "Peshawar, Pakistan",
     image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    capacity: "20,000",
-    established: "1984",
+    capacity: "22,000",
+    established: "2018",
     stats: {
       mostRuns: {
         name: "Umar Gul",
@@ -176,7 +176,7 @@ export default function HistorySection() {
           </h2>
           <div className="h-1 w-32 bg-primary mt-4 rounded-full" />
           <p className="text-gray-300 text-lg mt-4 max-w-2xl">
-            Explore Pakistan's finest cricket stadiums and their legendary records
+            Explore our prestigious cricket stadiums and their legendary records
           </p>
         </motion.div>
 
@@ -314,7 +314,7 @@ export default function HistorySection() {
             {/* Additional Ground Info */}
             <div className="mt-6 p-4 bg-black/30 rounded-lg border border-gray-800">
               <p className="text-gray-300 text-sm">
-                This stadium has been home to numerous historic matches and continues to be a fortress for Pakistani cricket. Known for its passionate crowds and challenging pitch conditions.
+                This stadium has been home to numerous historic matches and continues to be a fortress for our cricket team. Known for its passionate crowds and challenging pitch conditions.
               </p>
             </div>
           </motion.div>
