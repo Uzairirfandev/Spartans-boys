@@ -103,7 +103,7 @@ export default function AboutSection() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 1 }}
-      className="relative py-16 px-6 md:px-12 lg:px-20 bg-gradient-to-br from-background via-black/50 to-background text-white overflow-x-hidden"
+      className="relative py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-background via-black/50 to-background text-white overflow-x-hidden"
     >
       {/* Background Effects */}
       <motion.div 
@@ -169,7 +169,7 @@ export default function AboutSection() {
         <div className="absolute -right-40 bottom-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-background blur-3xl opacity-40" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
+      <div className="relative z-10 w-full">
         {/* Centered Header */}
         <motion.div
           initial={{ opacity: 0, y: 60, scale: 0.9 }}

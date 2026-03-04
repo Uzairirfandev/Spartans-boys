@@ -13,7 +13,9 @@ import {
   Award,
   Activity,
   TrendingUp,
-  Repeat
+  Repeat,
+  Flag,
+  Crown
 } from "lucide-react";
 
 export default function SkillsSection() {
@@ -75,7 +77,7 @@ export default function SkillsSection() {
       color: "blue"
     },
     {
-      icon: Heart,
+      icon: Crown,
       title: "Leadership",
       description: "Captaincy experience and team motivation",
       level: 95,
@@ -92,10 +94,10 @@ export default function SkillsSection() {
 
   // Career Statistics
   const matchStats = [
-    { icon: Repeat, number: "450", label: "Total Matches", suffix: "", color: "blue" },
+    { icon: Activity, number: "450", label: "Total Matches", suffix: "", color: "blue" },
     { icon: Trophy, number: "320", label: "Matches Won", suffix: "", color: "green" },
     { icon: Shield, number: "120", label: "Matches Lost", suffix: "", color: "red" },
-    { icon: Activity, number: "10", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
+    { icon: Flag, number: "10", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
   ];
 
   return (
@@ -136,7 +138,7 @@ export default function SkillsSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto"
           >
-            Complete career statistics across all formats - Test, ODI, and T20
+            Complete career statistics  - T20
           </motion.p>
         </motion.div>
 
@@ -173,7 +175,7 @@ export default function SkillsSection() {
                   }}
                 >
                   <div className="flex justify-center mb-3">
-                    <div className="p-3 rounded-full bg-primary/20 border border-primary/30">
+                    <div className="p-3 rounded-full bg-primary/20">
                       <stat.icon className={`w-6 h-6 text-${stat.color}-400`} />
                     </div>
                   </div>
@@ -189,89 +191,7 @@ export default function SkillsSection() {
           </div>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ 
-                delay: 1.2 + i * 0.1,
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                y: -10,
-                scale: 1.02,
-                transition: { duration: 0.3, type: "spring", stiffness: 400 }
-              }}
-              className="relative group"
-            >
-              <div className="relative bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 overflow-hidden">
-                {/* Hover Background Effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/30 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                
-                {/* Icon */}
-                <div className="mb-6">
-                  <div className="p-4 rounded-full bg-gradient-to-br from-primary/20 to-white/10 border border-white/20 w-fit">
-                    <skill.icon className={`w-8 h-8 md:w-10 md:h-10 text-${skill.color}-400`} />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  {skill.title}
-                </h3>
-                <p className="text-gray-400 mb-6 text-sm md:text-base">
-                  {skill.description}
-                </p>
-
-                {/* Skill Bar */}
-                <div className="relative">
-                  <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        delay: 1.7 + i * 0.1,
-                        duration: 1.5,
-                        ease: "easeOut"
-                      }}
-                      className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full relative overflow-hidden"
-                    >
-                      <motion.div
-                        animate={{
-                          x: ["0%", "100%"],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                      />
-                    </motion.div>
-                  </div>
-                  <span className="text-primary font-bold text-sm mt-2 block">
-                    {skill.level}%
-                  </span>
-                </div>
-
-                {/* Decorative Elements */}
-                <div className="absolute top-4 right-4">
-                  <Star className="w-4 h-4 text-primary/30" />
-                </div>
-                <div className="absolute bottom-4 right-4">
-                  <Award className="w-4 h-4 text-primary/20" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+       
 
         {/* Bottom CTA */}
         <motion.div

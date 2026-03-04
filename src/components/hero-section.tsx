@@ -153,7 +153,7 @@ export default function HeroSection() {
       </div>
  
       {/* Main Content - Positioned at top */}
-      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-32 md:pt-40 lg:pt-48">
+      <div className="relative z-30 w-full max-w-7xl pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8 pt-32 md:pt-40 lg:pt-48">
         <div className="flex flex-col">
           {/* Left-aligned Text Content */}
           <div className="text-left max-w-4xl">
@@ -207,7 +207,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.08, boxShadow: "0 0 40px oklch(79.763% 0.16776 75.61 / 0.8)" }}
                 whileTap={{ scale: 0.96 }}
-                className="px-12 py-4  ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
+                className="px-12 py-4 ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
               >
                 My Career
               </motion.button>
