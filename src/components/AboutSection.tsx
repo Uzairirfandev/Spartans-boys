@@ -8,8 +8,8 @@ import { dataManager } from "@/lib/data";
 import { useInView } from "framer-motion";
 
 export default function AboutSection() {
-  const sliderRef = useRef(null);
-  const sectionRef = useRef(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [teamMembers, setTeamMembers] = useState(dataManager.getTeamMembers());
@@ -53,11 +53,11 @@ export default function AboutSection() {
     const slider = sliderRef.current;
     if (slider) {
       checkScroll();
-      slider.addEventListener('scroll', checkScroll);
+      (slider as HTMLDivElement).addEventListener('scroll', checkScroll);
       window.addEventListener('resize', checkScroll);
       
       return () => {
-        slider.removeEventListener('scroll', checkScroll);
+        (slider as HTMLDivElement).removeEventListener('scroll', checkScroll);
         window.removeEventListener('resize', checkScroll);
       };
     }
@@ -65,7 +65,7 @@ export default function AboutSection() {
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      const scrollAmount = sliderRef.current.clientWidth * 0.8; // Scroll 80% of visible width
+      const scrollAmount = (sliderRef.current as HTMLDivElement).clientWidth * 0.8; // Scroll 80% of visible width
       sliderRef.current.scrollBy({ 
         left: -scrollAmount, 
         behavior: 'smooth' 
@@ -83,12 +83,12 @@ export default function AboutSection() {
     }
   };
 
-  const handleViewDetails = (memberId) => {
+  const handleViewDetails = (memberId: number) => {
     router.push(`/team/${memberId}`);
   };
 
   // Function to get role color (keeping gradient but with white text)
-  const getRoleColor = (role) => {
+  const getRoleColor = (role: string) => {
     if (role.includes("Batsman")) return "from-red-600 to-red-800";
     if (role.includes("Bowler")) return "from-red-600 to-red-800";
     if (role.includes("Allrounder")) return "from-red-600 to-red-800";
@@ -287,7 +287,7 @@ export default function AboutSection() {
               scrollBehavior: 'smooth'
             }}
           >
-            {teamMembers.map((member, index) => (
+            {teamMembers.map((member: any, index: number) => (
               <motion.div
                 key={member.id}
                 initial={{ opacity: 0, x: 100, rotateY: 45 }}
@@ -421,7 +421,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 1.2 }}
             className="flex justify-center gap-2 mt-6 flex-wrap"
           >
-            {teamMembers.map((_, index) => (
+            {teamMembers.map((_: any, index: number) => (
               <motion.button
                 key={index}
                 initial={{ opacity: 0, scale: 0 }}

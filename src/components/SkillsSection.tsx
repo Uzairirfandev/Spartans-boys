@@ -154,7 +154,7 @@ export default function SkillsSection() {
             <span className="text-primary">Match</span> Statistics
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {matchStats.map((stat, i) => (
+            {matchStats.map((stat: any, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.8 }}

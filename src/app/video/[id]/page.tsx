@@ -74,7 +74,7 @@ const videoData = [
 export default function VideoDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const [video, setVideo] = useState(null);
+  const [video, setVideo] = useState<typeof videoData[0] | null>(null);
   const [isLiked, setIsLiked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +82,7 @@ export default function VideoDetailPage() {
   useEffect(() => {
     if (params?.id) {
       const foundVideo = videoData.find(v => v.id === params.id);
-      setVideo(foundVideo || null);
+      setVideo(foundVideo ?? null);
       setIsLoading(false);
     }
   }, [params?.id]);
@@ -116,8 +116,8 @@ export default function VideoDetailPage() {
   }
 
   // Format numbers for display
-  const formatNumber = (num) => {
-    return parseInt(num).toLocaleString();
+  const formatNumber = (num: string | number) => {
+    return parseInt(num.toString()).toLocaleString();
   };
 
   return (
@@ -236,7 +236,7 @@ export default function VideoDetailPage() {
                 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {video.tags.map((tag, index) => (
+                  {video.tags.map((tag: string, index: number) => (
                     <span
                       key={index}
                       className="px-2 py-1 bg-primary/10 border border-primary/30 rounded-full text-xs text-primary"
@@ -329,7 +329,7 @@ export default function VideoDetailPage() {
               <div className="bg-black/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">Related Videos</h3>
                 <div className="space-y-3">
-                  {videoData.filter(v => v.id !== video.id).slice(0, 3).map((relatedVideo, index) => (
+                  {videoData.filter(v => v.id !== video.id).slice(0, 3).map((relatedVideo: any, index: number) => (
                     <Link key={relatedVideo.id} href={`/video/${relatedVideo.id}`}>
                       <motion.div
                         whileHover={{ x: 5 }}

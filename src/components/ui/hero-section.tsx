@@ -45,7 +45,7 @@ export default function HeroSection() {
         transition={{ duration: 1, delay: 0.5 }}
         className="absolute inset-0 overflow-hidden"
       >
-        {techStack.map((tech, i) => (
+        {techStack.map((tech: any, i: number) => (
           <motion.div
             key={i}
             initial={{
@@ -133,7 +133,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 1 }}
           className="flex flex-wrap justify-center gap-3 mb-10"
         >
-          {techStack.map((tech, i) => (
+          {techStack.map((tech: any, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 10 }}

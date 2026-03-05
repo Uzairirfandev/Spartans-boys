@@ -156,7 +156,7 @@ export default function GallerySection() {
 
           {/* Modern Masonry Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-6">
-            {filteredImages.map((image, index) => (
+            {filteredImages.map((image: any, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}

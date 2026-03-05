@@ -19,7 +19,7 @@ import {
   Bookmark,
 } from "lucide-react";
 import Link from "next/link";
-import { notFound, usePathname } from "next/navigation";
+import { notFound, usePathname, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 // ── Blog posts data ────────────────────────────────────────────────
@@ -96,9 +96,10 @@ const relatedPosts = [
   },
 ];
 
-export default function BlogPage({ params }: { params: { slug: string } }) {
+export default function BlogPage() {
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
+  const params = useParams();
   
   useEffect(() => {
     setIsClient(true);
@@ -383,7 +384,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {relatedPosts.map((item, index) => (
+            {relatedPosts.map((item: any, index: number) => (
               <motion.div
                 key={item.slug}
                 initial={{ opacity: 0, y: 30 }}

@@ -140,7 +140,7 @@ export default function HistorySection() {
       
       {/* Animated lines background (similar to other sections) */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_: any, i: number) => (
           <motion.div
             key={i}
             className="absolute w-0.5 bg-gradient-to-b from-transparent via-primary/50 to-transparent"
@@ -183,7 +183,7 @@ export default function HistorySection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Sidebar - Ground Names */}
           <div className="lg:col-span-4 space-y-3 md:space-y-4">
-            {groundItems.map((item, index) => (
+            {groundItems.map((item: any, index: number) => (
               <motion.button
                 key={index}
                 onClick={() => setActiveIndex(index)}

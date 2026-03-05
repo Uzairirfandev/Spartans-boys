@@ -65,7 +65,7 @@ export default function Footer() {
 
       {/* Animated cricket lines */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
-        {Array.from({ length: 15 }).map((_, i) => (
+        {Array.from({ length: 15 }).map((_: any, i: number) => (
           <motion.div
             key={i}
             className="absolute w-0.5 bg-gradient-to-b from-transparent via-primary/50 to-transparent"
@@ -113,7 +113,7 @@ export default function Footer() {
               
               {/* Social Media */}
               <div className="flex gap-3">
-                {socialLinks.map((link, i) => (
+                {socialLinks.map((link: any, i: number) => (
                   <motion.a
                     key={i}
                     href={link.href}
@@ -146,7 +146,7 @@ export default function Footer() {
               Team Highlights
             </motion.h4>
             <div className="space-y-4">
-              {careerStats.map((stat, i) => (
+              {careerStats.map((stat: any, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
@@ -179,7 +179,7 @@ export default function Footer() {
               Quick Links
             </motion.h4>
             <ul className="space-y-3">
-              {quickLinks.map((link, i) => (
+              {quickLinks.map((link: any, i: number) => (
                 <motion.li
                   key={i}
                   initial={{ opacity: 0, x: -20 }}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Youtube, Play, Upload } from "lucide-react";
 import Link from "next/link";
 import { dataManager } from "@/lib/data";
@@ -21,7 +21,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.7, ease: easeOut },
   },
   hover: {
     y: -10,
@@ -164,7 +164,7 @@ export default function BlogSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
         >
-          {videos.map((video, index) => (
+          {videos.map((video: any, index: number) => (
             <Link key={video.id} href={`/video/${video.slug}`}>
               <motion.article
                 variants={cardVariants}

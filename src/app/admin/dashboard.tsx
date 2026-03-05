@@ -37,10 +37,13 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Check if we're on client side
     if (typeof window !== 'undefined') {
-      const getCookie = (name) => {
+      const getCookie = (name: string) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+        if (parts.length === 2) {
+          const popped = parts.pop();
+          return popped?.split(';').shift();
+        }
         return null;
       };
       
@@ -81,7 +84,7 @@ export default function AdminDashboard() {
   const [newSkill, setNewSkill] = useState({ name: "", value: "", suffix: "", color: "red" });
 
   // Show notification
-  const showNotification = (type, message) => {
+  const showNotification = (type: string, message: string) => {
     setNotification({ show: true, type, message });
     setTimeout(() => setNotification({ show: false, type: "", message: "" }), 3000);
   };
@@ -103,7 +106,7 @@ export default function AdminDashboard() {
     showNotification("success", "Team member added successfully!");
   };
 
-  const deleteTeamMember = (id) => {
+  const deleteTeamMember = (id: string) => {
     dataManager.deleteTeamMember(id);
     refreshData();
     showNotification("success", "Team member deleted successfully!");
@@ -117,7 +120,7 @@ export default function AdminDashboard() {
     showNotification("success", "Video added successfully!");
   };
 
-  const deleteVideo = (id) => {
+  const deleteVideo = (id: string) => {
     dataManager.deleteVideo(id);
     refreshData();
     showNotification("success", "Video deleted successfully!");
@@ -131,7 +134,7 @@ export default function AdminDashboard() {
     showNotification("success", "Ground added successfully!");
   };
 
-  const deleteGround = (id) => {
+  const deleteGround = (id: string) => {
     dataManager.deleteGround(id);
     refreshData();
     showNotification("success", "Ground deleted successfully!");
@@ -145,7 +148,7 @@ export default function AdminDashboard() {
     showNotification("success", "Skill added successfully!");
   };
 
-  const deleteSkill = (id) => {
+  const deleteSkill = (id: string) => {
     dataManager.deleteSkill(id);
     refreshData();
     showNotification("success", "Skill deleted successfully!");
@@ -167,7 +170,7 @@ export default function AdminDashboard() {
         { label: "Videos", value: videos.length, icon: Youtube, color: "red" },
         { label: "Grounds", value: grounds.length, icon: MapPin, color: "green" },
         { label: "Career Stats", value: skills.length, icon: TrendingUp, color: "purple" },
-      ].map((stat, i) => (
+      ].map((stat: any, i: number) => (
         <motion.div
           key={i}
           initial={{ opacity: 0, y: 20 }}
@@ -203,7 +206,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {teamMembers.map((member) => (
+        {teamMembers.map((member: any) => (
           <motion.div
             key={member.id}
             initial={{ opacity: 0, x: 20 }}
@@ -284,7 +287,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {videos.map((video) => (
+        {videos.map((video: any) => (
           <motion.div
             key={video.id}
             initial={{ opacity: 0, x: 20 }}
@@ -353,7 +356,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {grounds.map((ground) => (
+        {grounds.map((ground: any) => (
           <motion.div
             key={ground.id}
             initial={{ opacity: 0, x: 20 }}
@@ -418,7 +421,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {skills.map((skill) => (
+        {skills.map((skill: any) => (
           <motion.div
             key={skill.id}
             initial={{ opacity: 0, x: 20 }}
@@ -612,7 +615,7 @@ export default function AdminDashboard() {
             <h1 className="text-2xl font-black text-primary mb-8">SPARTANS ADMIN</h1>
             
             <nav className="space-y-2">
-              {menuItems.map((item) => (
+              {menuItems.map((item: any) => (
                 <motion.button
                   key={item.id}
                   whileHover={{ scale: 1.02 }}

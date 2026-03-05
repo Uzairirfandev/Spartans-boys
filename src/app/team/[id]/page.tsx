@@ -263,15 +263,15 @@ const smallLines = Array.from({ length: 30 }, (_, i) => ({
 export default function TeamMemberDetail() {
   const params = useParams();
   const router = useRouter();
-  const [member, setMember] = useState(null);
+  const [member, setMember] = useState<typeof teamMembers[0] | null>(null);
 
   useEffect(() => {
-    const memberId = parseInt(params.id);
+    const memberId = parseInt(params.id as string);
     const foundMember = teamMembers.find(m => m.id === memberId);
-    setMember(foundMember);
+    setMember(foundMember || null);
   }, [params.id]);
 
-  const getRoleColor = (role) => {
+  const getRoleColor = (role: string) => {
     if (role.includes("Batsman")) return "from-blue-600 to-blue-800";
     if (role.includes("Bowler")) return "from-red-600 to-red-800";
     if (role.includes("Allrounder")) return "from-purple-600 to-purple-800";
@@ -279,7 +279,7 @@ export default function TeamMemberDetail() {
     return "from-primary to-secondary";
   };
 
-  const getRoleIcon = (role) => {
+  const getRoleIcon = (role: string) => {
     if (role.includes("Batsman")) return <TrendingUp className="w-5 h-5" />;
     if (role.includes("Bowler")) return <Zap className="w-5 h-5" />;
     if (role.includes("Allrounder")) return <Shield className="w-5 h-5" />;
