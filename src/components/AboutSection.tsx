@@ -188,20 +188,20 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-block"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight">
-              <motion.span 
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
+              <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-primary"
+                className="inline-block"
               >About</motion.span>{" "}
-              <motion.span 
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              <motion.span
+                initial={{ opacity: 0, rotate: -10, scale: 0.8 }}
+                whileInView={{ opacity: 1, rotate: -3, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-white"
+                transition={{ duration: 0.6, delay: 0.5, type: "spring", bounce: 0.45 }}
+                className="inline-block bg-yellow-400 text-black px-3 md:px-4 py-0.5 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]"
               >Team</motion.span>
             </h2>
             <motion.div 

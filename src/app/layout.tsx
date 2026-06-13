@@ -5,7 +5,7 @@ import { Poppins, Lato } from 'next/font/google'
 import { ThemeProviderWrapper } from './lib/theme-config'
 import SmoothScroll from '@/components/SmoothScroll'
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-poppins' })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700', '800'], variable: '--font-poppins' })
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-lato' })
 
 export const metadata: Metadata = {
