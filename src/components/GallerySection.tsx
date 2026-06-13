@@ -106,7 +106,7 @@ export default function GallerySection() {
 
   return (
     <>
-      <section className="relative py-24 px-4 md:px-6 bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden">
+      <section className="relative py-24 px-4 md:px-6 bg-gradient-to-br from-background via-black/50 to-background text-white overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
