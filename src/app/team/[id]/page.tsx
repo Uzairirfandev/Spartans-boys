@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Calendar, Target, Award, TrendingUp, Shield, Zap, Users, Trophy, Star, ChevronRight } from "lucide-react";
+import ClientOnly from "@/components/ClientOnly";
 
 // Team member data (same as in AboutSection)
 const teamMembers = [
@@ -312,6 +313,7 @@ export default function TeamMemberDetail() {
       </div>
 
       {/* Animated Lines */}
+      <ClientOnly>
       <div className="absolute inset-0 pointer-events-none">
         {smallLines.map((line) => (
           <motion.div
@@ -339,6 +341,7 @@ export default function TeamMemberDetail() {
           />
         ))}
       </div>
+      </ClientOnly>
 
       {/* Dark overlay for depth */}
       <div className="absolute inset-0 pointer-events-none">

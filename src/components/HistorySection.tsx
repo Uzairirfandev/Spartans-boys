@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Trophy, Target, Award, Crown } from "lucide-react";
+import ClientOnly from "./ClientOnly";
 
 const groundItems = [
   {
@@ -139,6 +140,7 @@ export default function HistorySection() {
       </div>
       
       {/* Animated lines background (similar to other sections) */}
+      <ClientOnly>
       <div className="absolute inset-0 pointer-events-none opacity-30">
         {Array.from({ length: 20 }).map((_: any, i: number) => (
           <motion.div
@@ -160,6 +162,7 @@ export default function HistorySection() {
           />
         ))}
       </div>
+      </ClientOnly>
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 max-w-7xl">
         {/* Header */}

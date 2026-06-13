@@ -1,29 +1,61 @@
 "use client";
- 
-import { motion } from "framer-motion";
- 
-export default function HeroSection() {
-  // 40 small fast-moving lines — brighter & sharper
-  const smallLines = Array.from({ length: 70 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    duration: 3 + Math.random() * 3,
-    delay: Math.random() * 5,
-    direction: Math.random() > 0.5 ? "up" : "down",
-    length: 60 + Math.random() * 140,
-    opacity: 0.45 + Math.random() * 0.35,
-  }));
 
-  // Red smoke particles
-  const smokeParticles = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    x: 20 + Math.random() * 60,
-    size: 150 + Math.random() * 300,
-    duration: 8 + Math.random() * 10,
-    delay: Math.random() * 5,
-    opacity: 0.2 + Math.random() * 0.2,
-  }));
- 
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+type Line = {
+  id: number;
+  x: number;
+  duration: number;
+  delay: number;
+  direction: "up" | "down";
+  length: number;
+  opacity: number;
+};
+
+type Smoke = {
+  id: number;
+  x: number;
+  size: number;
+  duration: number;
+  delay: number;
+  opacity: number;
+};
+
+export default function HeroSection() {
+  // These use Math.random(), so they must be generated only on the client
+  // (after mount) — otherwise the server and client HTML differ and React
+  // throws a hydration error. They start empty and fill in after mount.
+  const [smallLines, setSmallLines] = useState<Line[]>([]);
+  const [smokeParticles, setSmokeParticles] = useState<Smoke[]>([]);
+
+  useEffect(() => {
+    // 70 small fast-moving lines — brighter & sharper
+    setSmallLines(
+      Array.from({ length: 70 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        duration: 3 + Math.random() * 3,
+        delay: Math.random() * 5,
+        direction: Math.random() > 0.5 ? "up" : "down",
+        length: 60 + Math.random() * 140,
+        opacity: 0.45 + Math.random() * 0.35,
+      }))
+    );
+
+    // Red smoke particles
+    setSmokeParticles(
+      Array.from({ length: 15 }, (_, i) => ({
+        id: i,
+        x: 20 + Math.random() * 60,
+        size: 150 + Math.random() * 300,
+        duration: 8 + Math.random() * 10,
+        delay: Math.random() * 5,
+        opacity: 0.2 + Math.random() * 0.2,
+      }))
+    );
+  }, []);
+
   return (
     <section className="relative min-h-screen w-full flex items-start justify-center overflow-hidden bg-background text-white">
       {/* Full-screen background image */}

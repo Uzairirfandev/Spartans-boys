@@ -1,0 +1,11 @@
+# Netlify configuration for this Next.js app.
+# Netlify auto-detects Next.js and installs @netlify/plugin-nextjs,
+# which handles the server-rendered pages (e.g. /team/[id], /blog/[slug]).
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Use a modern Node version for the build.
+  NODE_VERSION = "20"

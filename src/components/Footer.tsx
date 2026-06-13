@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
+import ClientOnly from "./ClientOnly";
+import {
   Twitter, 
   Instagram, 
   Youtube, 
@@ -14,9 +15,6 @@ import {
   Calendar,
   Users,
   Target,
-  CricketGround,
-  Bat,
-  Ball,
   Award,
   Star
 } from "lucide-react";
@@ -64,6 +62,7 @@ export default function Footer() {
       </div>
 
       {/* Animated cricket lines */}
+      <ClientOnly>
       <div className="absolute inset-0 pointer-events-none opacity-20">
         {Array.from({ length: 15 }).map((_: any, i: number) => (
           <motion.div
@@ -85,6 +84,7 @@ export default function Footer() {
           />
         ))}
       </div>
+      </ClientOnly>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Main Footer Content */}

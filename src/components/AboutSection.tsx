@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Eye, Calendar, Target, Award } from "lucide-
 import { useRouter } from "next/navigation";
 import { dataManager } from "@/lib/data";
 import { useInView } from "framer-motion";
+import ClientOnly from "./ClientOnly";
 
 export default function AboutSection() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -130,7 +131,8 @@ export default function AboutSection() {
       </motion.div>
 
       {/* Full-section brighter & sharper moving lines */}
-      <motion.div 
+      <ClientOnly>
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.8 }}
@@ -162,6 +164,7 @@ export default function AboutSection() {
           />
         ))}
       </motion.div>
+      </ClientOnly>
 
       {/* Minimal dark gradient for depth */}
       <div className="absolute inset-0 pointer-events-none">
