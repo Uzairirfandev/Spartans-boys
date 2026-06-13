@@ -223,7 +223,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 1 }}
-              className="text-2xl md:text-3xl font-light mb-16 tracking-wide ml-[-39px] drop-shadow-md text-gray-200"
+              className="text-xl sm:text-2xl md:text-3xl font-light mb-16 tracking-wide md:ml-[-39px] drop-shadow-md text-gray-200"
             >
               Forged in Fire • Born to Win
             </motion.p>
@@ -239,7 +239,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.08, boxShadow: "0 0 40px oklch(79.763% 0.16776 75.61 / 0.8)" }}
                 whileTap={{ scale: 0.96 }}
-                className="px-12 py-4 ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
+                className="px-8 sm:px-12 py-4 md:ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
               >
                 My Career
               </motion.button>

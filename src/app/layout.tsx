@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${lato.variable}`} suppressHydrationWarning>
-      <body className="scroll-smooth bg-white text-black dark:bg-[#0e0e0e] dark:text-white transition-colors duration-300">
+      <body className="scroll-smooth overflow-x-hidden bg-white text-black dark:bg-[#0e0e0e] dark:text-white transition-colors duration-300">
         <ThemeProviderWrapper>
           <SmoothScroll>
             {children}
