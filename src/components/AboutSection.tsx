@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Eye, Calendar, Target, Award } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, Calendar, Target, Award, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { dataManager } from "@/lib/data";
 import { useInView } from "framer-motion";
@@ -188,7 +188,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-block"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
+            <h2 className="text-6xl md:text-7xl lg:text-8xl font-champ font-extrabold uppercase tracking-tight text-white">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -369,15 +369,10 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 1.5 }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 bg-primary/15 border-2 border-primary/50 rounded-xl text-white font-bold uppercase tracking-widest text-lg transition-all shadow-2xl shadow-primary/30 group"
+            className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all group"
           >
             View Full Squad
-            <motion.span 
-              initial={{ x: 0 }}
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.3 }}
-              className="inline-block ml-2"
-            >→</motion.span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
         </motion.div>
       </div>

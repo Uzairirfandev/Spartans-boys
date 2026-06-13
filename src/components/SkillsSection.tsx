@@ -134,7 +134,7 @@ export default function SkillsSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white mb-6"
+            className="text-6xl md:text-7xl lg:text-8xl font-champ font-extrabold uppercase tracking-tight text-white mb-6"
           >
             <span className="inline-block">Cricket</span>{" "}
             <span className="inline-block bg-[#BB0903] text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-black shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Statistics</span>

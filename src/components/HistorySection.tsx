@@ -173,7 +173,7 @@ export default function HistorySection() {
           transition={{ duration: 0.8 }}
           className="mb-12 md:mb-16"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-champ font-extrabold uppercase tracking-tight text-white">
             <span className="inline-block">Our</span>{" "}
             <span className="inline-block bg-[#BB0903] text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-black shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Grounds</span>
           </h2>

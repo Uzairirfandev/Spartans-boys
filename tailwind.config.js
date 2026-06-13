@@ -11,7 +11,7 @@ module.exports = {
       fontFamily: {
         poppins: ['var(--font-poppins)', 'sans-serif'],
         lato: ['var(--font-lato)', 'sans-serif'],
-      
+        champ: ['var(--font-champ)', 'sans-serif'],
       },
       colors: { 
         // Accent colors (work in both themes)

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 type Line = {
   id: number;
@@ -237,11 +238,12 @@ export default function HeroSection() {
             >
               <div className="hidden md:block h-32 w-0.5 bg-gradient-to-b from-transparent via-primary/70 to-transparent" />
               <motion.button
-                whileHover={{ scale: 1.08, boxShadow: "0 0 40px oklch(79.763% 0.16776 75.61 / 0.8)" }}
-                whileTap={{ scale: 0.96 }}
-                className="px-8 sm:px-12 py-4 md:ml-[-32px] bg-primary/20 border-2 border-primary/60 rounded-xl text-white font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-primary/30 hover:border-primary hover:text-white transition-all shadow-2xl shadow-primary/30 backdrop-blur-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 px-10 py-4 md:ml-[-32px] bg-primary text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all group"
               >
                 My Career
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </motion.div>
           </div>

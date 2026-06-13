@@ -65,7 +65,7 @@ export default function BlogSection() {
           transition={{ duration: 0.9 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-champ font-extrabold uppercase tracking-tight text-white">
             <span className="inline-block">Cricket</span>{" "}
             <span className="inline-block bg-[#BB0903] text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-black shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Insights</span>
           </h2>
@@ -228,10 +228,10 @@ export default function BlogSection() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border-2 border-primary/50 rounded-xl text-primary font-bold uppercase tracking-wider text-base hover:bg-primary/20 hover:border-primary/70 transition-all shadow-lg shadow-primary/20 cursor-pointer"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all group cursor-pointer"
             >
               View All Cricket Posts
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.div>
           </Link>
         </motion.div>
