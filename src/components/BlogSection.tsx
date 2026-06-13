@@ -65,8 +65,9 @@ export default function BlogSection() {
           transition={{ duration: 0.9 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-            Cricket <span className="text-primary">Insights</span>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
+            <span className="inline-block">Cricket</span>{" "}
+            <span className="inline-block bg-yellow-400 text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Insights</span>
           </h2>
           <p className="mt-4 text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             Training tips, match strategies, and life as a professional cricketer.

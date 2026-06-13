@@ -126,10 +126,10 @@ export default function SkillsSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white mb-6"
           >
-            <span className="text-primary">Cricket</span>{" "}
-            <span className="text-white">Statistics</span>
+            <span className="inline-block">Cricket</span>{" "}
+            <span className="inline-block bg-yellow-400 text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Statistics</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
