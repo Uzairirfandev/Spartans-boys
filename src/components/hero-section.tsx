@@ -185,10 +185,10 @@ export default function HeroSection() {
       </div>
  
       {/* Main Content - top on desktop, full-height column on mobile */}
-      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-64 md:pt-40 lg:pt-48 pb-2 md:pb-0 flex flex-col min-h-[80vh] md:min-h-0">
+      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-24 md:pt-40 lg:pt-48 pb-10 md:pb-0 flex flex-col min-h-[80vh] md:min-h-0">
         <div className="flex flex-col flex-1">
           {/* Text content: centered column on mobile, left block on desktop */}
-          <div className="text-center md:text-left max-w-4xl flex flex-col flex-1 md:block">
+          <div className="text-center md:text-left max-w-4xl flex flex-col flex-1 justify-end md:block">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -233,7 +233,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex items-center justify-center md:justify-start gap-8 mt-auto md:mt-0"
+              className="flex items-center justify-center md:justify-start gap-8"
             >
               <div className="hidden md:block h-32 w-0.5 bg-gradient-to-b from-transparent via-primary/70 to-transparent" />
               <motion.button
