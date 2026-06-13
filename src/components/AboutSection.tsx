@@ -282,7 +282,7 @@ export default function AboutSection() {
           {/* Slider Container - Fixed smooth scrolling */}
           <div
             ref={sliderRef}
-            className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide snap-x snap-mandatory px-4 py-4"
+            className="flex overflow-x-auto gap-6 scrollbar-hide snap-x snap-mandatory px-4 py-12"
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
@@ -293,125 +293,30 @@ export default function AboutSection() {
             {teamMembers.map((member: any, index: number) => (
               <motion.div
                 key={member.id}
-                initial={{ opacity: 0, x: 100, rotateY: 45 }}
-                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+                initial={{ opacity: 0, y: 40, rotate: index % 2 === 0 ? -3 : 3 }}
+                whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -3 : 3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: 0.5 + index * 0.15, ease: "easeOut" }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="flex-none w-[240px] md:w-[260px] snap-start py-2"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                whileHover={{ y: -12, rotate: 0, scale: 1.03 }}
+                onClick={() => handleViewDetails(member.id)}
+                className="group relative flex-none w-[240px] md:w-[260px] h-[400px] snap-start rounded-[2rem] bg-[#1a1a1a] border-2 border-white/80 cursor-pointer overflow-hidden shadow-[0_0_30px_rgba(200,255,40,0.5)] hover:shadow-[0_0_50px_rgba(200,255,40,0.85)] hover:border-white transition-shadow duration-500"
               >
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="group relative bg-black/40 backdrop-blur-xl border-2 border-white/10 rounded-2xl overflow-visible hover:border-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/30 h-[420px] flex flex-col"
-                >
-                  {/* Hover effect without scale transform */}
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-gradient-to-t from-primary/0 via-primary/0 to-transparent group-hover:from-primary/10 group-hover:via-transparent transition-all duration-500 rounded-2xl pointer-events-none" 
-                  />
-                  
-                  {/* Player Image Container */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="relative h-[260px] overflow-hidden rounded-t-2xl"
-                  >
-                    <motion.img
-                      initial={{ scale: 1.2 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
+                {/* Subtle top sheen */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+
+                {/* Avatar + name (bottom-left) */}
+                <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/90 shrink-0 bg-black">
+                    <img
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                     />
-                    
-                    {/* Gradient Overlay */}
-                    <motion.div 
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 0.8 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" 
-                    />
-                    
-                    {/* Player Number */}
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.6, type: "spring" }}
-                      className="absolute top-4 right-4 bg-primary/90 text-white text-lg font-black w-10 h-10 rounded-full flex items-center justify-center border-2 border-white/30 shadow-xl group-hover:scale-110 transition-transform duration-300"
-                    >
-                      {member.number}
-                    </motion.div>
-                    
-                    {/* Country/Team Badge */}
-                    <motion.div 
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.7 }}
-                      className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 group-hover:bg-primary/30 group-hover:border-primary/50 transition-all duration-300"
-                    >
-                      <span className="text-xs font-semibold text-white">{member.country}</span>
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Player Info */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    className="p-3 flex-1 flex flex-col"
-                  >
-                    <motion.h3 
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.9 }}
-                      className="text-lg font-bold text-white mb-1 drop-shadow-lg text-center group-hover:text-primary transition-colors duration-300"
-                    >
-                      {member.name}
-                    </motion.h3>
-                    
-                    {/* Role Badge with dynamic color and white text */}
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 1 }}
-                      className={`inline-block mx-auto px-3 py-1 rounded-full bg-gradient-to-r ${getRoleColor(member.role)} mb-2 shadow-lg group-hover:scale-105 transition-transform duration-300`}
-                    >
-                      <p className="text-white font-semibold text-xs">
-                        {member.role}
-                      </p>
-                    </motion.div>
-                    
-                    {/* View Details Button */}
-                    <motion.button
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 1.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleViewDetails(member.id)}
-                      className="mt-auto py-2 bg-primary/20 border border-primary/50 rounded-lg text-white font-semibold text-xs hover:bg-primary/40 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                    >
-                      <Eye className="w-3 h-3 group-hover/btn:animate-pulse" />
-                      View Details
-                    </motion.button>
-                  </motion.div>
-                </motion.div>
+                  </div>
+                  <span className="text-white font-bold text-lg drop-shadow-lg truncate">
+                    {member.name}
+                  </span>
+                </div>
               </motion.div>
             ))}
           </div>
