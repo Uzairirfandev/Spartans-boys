@@ -125,7 +125,7 @@ export default function GallerySection() {
             <span className="text-primary font-semibold tracking-wider uppercase">Our Memories</span>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white mt-2 mb-4">
               <span className="inline-block">Photo</span>{" "}
-              <span className="inline-block bg-yellow-400 text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Gallery</span>
+              <span className="inline-block bg-red-700 text-white px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Gallery</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Captured moments from training, matches, and life on and off the field.
