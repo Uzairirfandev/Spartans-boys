@@ -175,7 +175,7 @@ export default function HistorySection() {
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
             <span className="inline-block">Our</span>{" "}
-            <span className="inline-block bg-[#BB0903] text-white px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Grounds</span>
+            <span className="inline-block bg-[#BB0903] text-black px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Grounds</span>
           </h2>
           <div className="h-1 w-32 bg-primary mt-4 rounded-full" />
           <p className="text-gray-300 text-lg mt-4 max-w-2xl">
