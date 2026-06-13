@@ -201,7 +201,7 @@ export default function AboutSection() {
                 whileInView={{ opacity: 1, rotate: -3, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5, type: "spring", bounce: 0.45 }}
-                className="inline-block bg-red-700 text-white px-3 md:px-4 py-0.5 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]"
+                className="inline-block bg-[#BB0903] text-white px-3 md:px-4 py-0.5 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]"
               >Team</motion.span>
             </h2>
             <motion.div 

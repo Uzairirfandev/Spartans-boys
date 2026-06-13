@@ -67,7 +67,7 @@ export default function BlogSection() {
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold uppercase tracking-tight text-white">
             <span className="inline-block">Cricket</span>{" "}
-            <span className="inline-block bg-red-700 text-white px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Insights</span>
+            <span className="inline-block bg-[#BB0903] text-white px-3 md:px-4 py-0.5 -rotate-3 border-[3px] border-gray-700 shadow-[4px_4px_0_rgba(0,0,0,0.45)]">Insights</span>
           </h2>
           <p className="mt-4 text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             Training tips, match strategies, and life as a professional cricketer.
