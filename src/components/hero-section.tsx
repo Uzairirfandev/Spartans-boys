@@ -57,7 +57,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex items-start justify-center overflow-hidden bg-background text-white">
+    <section className="relative min-h-[80vh] md:min-h-screen w-full flex items-start justify-center overflow-hidden bg-background text-white">
       {/* Full-screen background image */}
       <div className="absolute inset-0 w-[110%] h-[130%]">
         <img
@@ -184,11 +184,11 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-purple-900/20" />
       </div>
  
-      {/* Main Content - Positioned at top */}
-      <div className="relative z-30 w-full max-w-7xl pl-4 md:pl-6 lg:pl-8 pr-4 md:pr-6 lg:pr-8 pt-32 md:pt-40 lg:pt-48">
-        <div className="flex flex-col">
-          {/* Left-aligned Text Content */}
-          <div className="text-left max-w-4xl">
+      {/* Main Content - top on desktop, full-height column on mobile */}
+      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-24 md:pt-40 lg:pt-48 pb-12 md:pb-0 flex flex-col min-h-[80vh] md:min-h-0">
+        <div className="flex flex-col flex-1">
+          {/* Text content: centered column on mobile, left block on desktop */}
+          <div className="text-center md:text-left max-w-4xl flex flex-col flex-1 md:block">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -223,7 +223,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 1 }}
-              className="text-xl sm:text-2xl md:text-3xl font-light mb-16 tracking-wide md:ml-[-39px] drop-shadow-md text-gray-200"
+              className="hidden md:block text-xl sm:text-2xl md:text-3xl font-light mb-16 tracking-wide md:ml-[-39px] drop-shadow-md text-gray-200"
             >
               Forged in Fire • Born to Win
             </motion.p>
@@ -233,7 +233,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex items-center justify-start gap-8"
+              className="flex items-center justify-center md:justify-start gap-8 mt-auto md:mt-0"
             >
               <div className="hidden md:block h-32 w-0.5 bg-gradient-to-b from-transparent via-primary/70 to-transparent" />
               <motion.button
