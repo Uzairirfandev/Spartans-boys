@@ -299,7 +299,7 @@ export default function AboutSection() {
                 transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                 whileHover={{ y: -12, rotate: 0, scale: 1.03 }}
                 onClick={() => handleViewDetails(member.id)}
-                className="group relative flex-none w-[240px] md:w-[260px] h-[400px] snap-start rounded-[2rem] bg-[#1a1a1a] border-2 border-white/80 cursor-pointer overflow-hidden shadow-[0_0_30px_rgba(200,255,40,0.5)] hover:shadow-[0_0_50px_rgba(200,255,40,0.85)] hover:border-white transition-shadow duration-500"
+                className="group relative flex-none w-[240px] md:w-[260px] h-[400px] snap-start rounded-[2rem] bg-[#1a1a1a] border-2 border-white/80 cursor-pointer overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:shadow-[0_0_50px_rgba(220,38,38,0.85)] hover:border-white transition-shadow duration-500"
               >
                 {/* Subtle top sheen */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
