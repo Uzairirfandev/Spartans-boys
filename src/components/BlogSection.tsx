@@ -163,53 +163,39 @@ export default function BlogSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
         >
-          {videos.map((video: any, index: number) => (
+          {videos.slice(0, 3).map((video: any, index: number) => (
             <Link key={video.id} href={`/video/${video.slug}`}>
               <motion.article
                 variants={cardVariants}
                 whileHover="hover"
-                className="group cursor-pointer bg-gray-950/70 backdrop-blur-md border border-gray-800 rounded-2xl overflow-hidden shadow-lg shadow-black/40 transition-all duration-400 hover:border-primary/40 flex flex-col"
+                className="group cursor-pointer flex flex-col"
               >
                 {/* Image */}
-                <div className="relative h-40 md:h-48 overflow-hidden flex-shrink-0">
+                <div className="relative h-56 md:h-64 overflow-hidden rounded-2xl">
                   <img
                     src={video.image}
                     alt={video.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent/30" />
-                  <div className="absolute top-3 left-3 px-3 py-1.5 bg-primary/90 text-black text-xs font-bold rounded-full">
-                    {video.category}
-                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 md:p-6 flex flex-col bg-background flex-grow">
-                  <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {video.date}
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" />
-                      {video.readTime}
-                    </div>
-                  </div>
-
-                  <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                <div className="pt-5 flex flex-col">
+                  <h3 className="font-champ font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
                     {video.title}
                   </h3>
 
-                  <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
+                  <div className="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                    <Calendar className="w-4 h-4 text-primary" />
+                    {video.date}
+                  </div>
+
+                  <p className="text-gray-400 text-sm line-clamp-3">
                     {video.excerpt}
                   </p>
-
-                  <div className="flex items-center text-primary font-medium text-sm group-hover:text-primary/80 transition-colors mt-auto">
-                    Watch Video
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-2 duration-300" />
-                  </div>
                 </div>
               </motion.article>
             </Link>

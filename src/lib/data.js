@@ -59,6 +59,18 @@ const initialVideos = [
     views: 890,
     image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
   },
+  {
+    id: 3,
+    slug: "cricket-nutrition",
+    title: "Cricket Nutrition: Fueling Peak Performance",
+    excerpt: "What I eat before a match, during breaks, and in recovery — the simple diet habits that keep energy and focus high through long days on the field.",
+    date: "Dec 10, 2025",
+    readTime: "5 min read",
+    category: "Nutrition",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    views: 640,
+    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+  },
 ];
 
 const initialGrounds = [
