@@ -301,19 +301,20 @@ export default function AboutSection() {
                 onClick={() => handleViewDetails(member.id)}
                 className="group relative flex-none w-[240px] md:w-[260px] h-[400px] snap-start rounded-[2rem] bg-[#1a1a1a] border-2 border-white/80 cursor-pointer overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:shadow-[0_0_50px_rgba(220,38,38,0.85)] hover:border-white transition-shadow duration-500"
               >
-                {/* Subtle top sheen */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+                {/* Full player image */}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
 
-                {/* Avatar + name (bottom-left) */}
-                <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/90 shrink-0 bg-black">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <span className="text-white font-bold text-lg drop-shadow-lg truncate">
+                {/* Bottom gradient so the name stays readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
+
+                {/* Name */}
+                <div className="absolute bottom-5 left-5 right-5">
+                  <span className="text-white font-bold text-xl drop-shadow-lg truncate">
                     {member.name}
                   </span>
                 </div>
