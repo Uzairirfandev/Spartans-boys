@@ -32,7 +32,7 @@ export default function HeroSection() {
   useEffect(() => {
     // 70 small fast-moving lines — brighter & sharper
     setSmallLines(
-      Array.from({ length: 70 }, (_, i) => ({
+      Array.from({ length: 20 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         duration: 3 + Math.random() * 3,
@@ -45,7 +45,7 @@ export default function HeroSection() {
 
     // Red smoke particles
     setSmokeParticles(
-      Array.from({ length: 15 }, (_, i) => ({
+      Array.from({ length: 5 }, (_, i) => ({
         id: i,
         x: 20 + Math.random() * 60,
         size: 150 + Math.random() * 300,
@@ -126,7 +126,7 @@ export default function HeroSection() {
 
       {/* Moving red light streaks */}
       <div className="absolute inset-0 pointer-events-none z-16">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <motion.div
             key={`streak-${i}`}
             className="absolute bottom-0 w-32 h-32"

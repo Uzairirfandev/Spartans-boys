@@ -31,7 +31,7 @@ export default function AboutSection() {
   }, []);
 
   // 40 small fast-moving lines — brighter & sharper (same as Hero)
-  const smallLines = Array.from({ length: 40 }, (_, i) => ({
+  const smallLines = Array.from({ length: 12 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,                     // full width spread
     duration: 3 + Math.random() * 3,            // fast: 3–6 seconds

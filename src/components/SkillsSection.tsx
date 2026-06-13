@@ -36,11 +36,19 @@ export default function SkillsSection() {
       const interval = duration / steps;
 
       const timer = setInterval(() => {
-        setCounters(prev => prev.map(counter => {
-          const increment = counter.target / steps;
-          const newValue = Math.min(counter.current + increment, counter.target);
-          return { ...counter, current: newValue };
-        }));
+        setCounters(prev => {
+          const next = prev.map(counter => {
+            const increment = counter.target / steps;
+            const newValue = Math.min(counter.current + increment, counter.target);
+            return { ...counter, current: newValue };
+          });
+          // Stop updating once every counter has reached its target,
+          // otherwise this interval keeps re-rendering the section forever.
+          if (next.every(c => c.current >= c.target)) {
+            clearInterval(timer);
+          }
+          return next;
+        });
       }, interval);
 
       return () => clearInterval(timer);

@@ -64,7 +64,7 @@ export default function Footer() {
       {/* Animated cricket lines */}
       <ClientOnly>
       <div className="absolute inset-0 pointer-events-none opacity-20">
-        {Array.from({ length: 15 }).map((_: any, i: number) => (
+        {Array.from({ length: 6 }).map((_: any, i: number) => (
           <motion.div
             key={i}
             className="absolute w-0.5 bg-gradient-to-b from-transparent via-primary/50 to-transparent"

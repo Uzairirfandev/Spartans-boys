@@ -142,7 +142,7 @@ export default function HistorySection() {
       {/* Animated lines background (similar to other sections) */}
       <ClientOnly>
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        {Array.from({ length: 20 }).map((_: any, i: number) => (
+        {Array.from({ length: 8 }).map((_: any, i: number) => (
           <motion.div
             key={i}
             className="absolute w-0.5 bg-gradient-to-b from-transparent via-primary/50 to-transparent"
