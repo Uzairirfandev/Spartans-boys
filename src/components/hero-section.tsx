@@ -185,7 +185,7 @@ export default function HeroSection() {
       </div>
  
       {/* Main Content - top on desktop, full-height column on mobile */}
-      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-32 md:pt-40 lg:pt-48 pb-2 md:pb-0 flex flex-col min-h-[80vh] md:min-h-0">
+      <div className="relative z-30 w-full max-w-7xl px-4 md:px-6 lg:px-8 pt-40 md:pt-40 lg:pt-48 pb-2 md:pb-0 flex flex-col min-h-[80vh] md:min-h-0">
         <div className="flex flex-col flex-1">
           {/* Text content: centered column on mobile, left block on desktop */}
           <div className="text-center md:text-left max-w-4xl flex flex-col flex-1 md:block">
