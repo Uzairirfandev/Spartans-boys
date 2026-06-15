@@ -32,6 +32,7 @@ const initialTeamMembers = [
   { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team C", age: 26, matches: 90, runs: 2800, wickets: 45 },
   { id: 4, name: "Hammad", role: "Batsman", number: "9", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team D", age: 23, matches: 80, runs: 3200, wickets: 5 },
   { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team E", age: 27, matches: 110, runs: 3500, wickets: 85 },
+  { id: 6, name: "Ali", role: "Bowler", number: "21", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team F", age: 25, matches: 95, runs: 1200, wickets: 110 },
 ];
 
 const initialVideos = [
