@@ -22,11 +22,13 @@ export default function SkillsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   
+  // Team match record. Start at 0 (no fake data) — update these targets when you
+  // want to show real totals.
   const [counters, setCounters] = useState([
-    { current: 0, target: 450, suffix: "" },    // Total Matches
-    { current: 0, target: 320, suffix: "" },    // Matches Won
-    { current: 0, target: 120, suffix: "" },    // Matches Lost
-    { current: 0, target: 10, suffix: "" }      // Matches Drawn/Tied
+    { current: 0, target: 0, suffix: "" },    // Total Matches
+    { current: 0, target: 0, suffix: "" },    // Matches Won
+    { current: 0, target: 0, suffix: "" },    // Matches Lost
+    { current: 0, target: 0, suffix: "" }     // Matches Drawn/Tied
   ]);
 
   useEffect(() => {
@@ -102,10 +104,10 @@ export default function SkillsSection() {
 
   // Career Statistics
   const matchStats = [
-    { icon: Activity, number: "450", label: "Total Matches", suffix: "", color: "blue" },
-    { icon: Trophy, number: "320", label: "Matches Won", suffix: "", color: "green" },
-    { icon: Shield, number: "120", label: "Matches Lost", suffix: "", color: "red" },
-    { icon: Flag, number: "10", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
+    { icon: Activity, number: "0", label: "Total Matches", suffix: "", color: "blue" },
+    { icon: Trophy, number: "0", label: "Matches Won", suffix: "", color: "green" },
+    { icon: Shield, number: "0", label: "Matches Lost", suffix: "", color: "red" },
+    { icon: Flag, number: "0", label: "Matches Drawn/Tied", suffix: "", color: "yellow" },
   ];
 
   return (

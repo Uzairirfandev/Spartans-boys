@@ -1,0 +1,117 @@
+# Add Score — Online Database Setup (Supabase)
+
+Ye feature ke do mode hain:
+
+- **Bina setup ke:** "Add Score" abhi kaam karega, lekin score sirf usi browser
+  mein save hoga jahan aap add karein (doosre log/phone par nahi dikhega).
+- **Supabase ke saath:** score ek online database mein save hoga aur **har device
+  aur har visitor** ko dikhega — yehi aap chahte hain.
+
+Niche ke steps follow karke shared/online mode on karein. Sab kuch **free** hai.
+
+---
+
+## Step 1 — Supabase account + project banayein
+
+1. https://supabase.com par jaayein aur **Start your project** se sign up karein
+   (GitHub ya email se).
+2. **New project** par click karein.
+   - Name: `spartans-boys` (kuch bhi)
+   - Database Password: koi strong password (kahin note kar lein)
+   - Region: apne paas wala chunein
+3. **Create new project** dabayein. 1–2 minute lagenge ready hone mein.
+
+## Step 2 — Database table banayein
+
+1. Left sidebar mein **SQL Editor** kholein.
+2. **New query** par click karein.
+3. Niche wala poora code copy-paste karein aur **Run** dabayein:
+
+```sql
+create table if not exists public.match_performances (
+  id uuid primary key default gen_random_uuid(),
+  player_id int not null,
+  player_name text not null default '',
+  ground text not null default '',
+  match_date date not null default current_date,
+  opponent text not null default 'Unknown',
+  runs int not null default 0,
+  balls int not null default 0,
+  fours int not null default 0,
+  sixes int not null default 0,
+  overs numeric not null default 0,
+  runs_conceded int not null default 0,
+  wickets int not null default 0,
+  maidens int not null default 0,
+  catches int not null default 0,
+  notes text not null default '',
+  created_at timestamptz not null default now()
+);
+
+-- Row Level Security on karein
+alter table public.match_performances enable row level security;
+
+-- Sab ko read/add/delete ki ijazat (chhoti team site ke liye theek hai)
+create policy "Public read"   on public.match_performances for select using (true);
+create policy "Public insert" on public.match_performances for insert with check (true);
+create policy "Public delete" on public.match_performances for delete using (true);
+```
+
+"Success. No rows returned" aaye to table ban gayi.
+
+> **Agar aap ne pehle (purani) table bana li thi** (jisme `ground`/`player_name`
+> columns nahi the), to ye chalakar columns add kar lein:
+>
+> ```sql
+> alter table public.match_performances add column if not exists player_name text not null default '';
+> alter table public.match_performances add column if not exists ground text not null default '';
+> ```
+
+## Step 3 — API keys copy karein
+
+1. Left sidebar mein **Settings** (gear icon) → **API** kholein.
+2. Do cheezein chahiye:
+   - **Project URL** (jaise `https://abcd1234.supabase.co`)
+   - **Project API keys** → **anon public** key (lambi `eyJ...` wali)
+
+## Step 4 — Keys project mein daalein (local testing)
+
+1. Project folder mein `.env.local.example` file ko copy karke naam `.env.local`
+   rakhein.
+2. Usme apni values paste karein:
+
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://abcd1234.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi....(poori lambi key)
+   ```
+
+3. Dev server band karke dobara chalayein:
+
+   ```
+   npm run dev
+   ```
+
+4. Kisi player ke page par jaakar **Add Score** karein. Ab profile card mein
+   niche **"Online — sab ko dikhta hai"** (green cloud) likha aayega. Bas! 🎉
+
+## Step 5 — Live site (Netlify) par bhi keys daalein
+
+1. Netlify dashboard → apni site → **Site configuration** →
+   **Environment variables**.
+2. Wahi do variables **Add** karein:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+3. **Deploys** → **Trigger deploy** → **Deploy site** se dobara deploy karein.
+
+Ab live website par jo bhi score add hoga, wo sab ko har device par dikhega.
+
+---
+
+## Notes
+
+- `anon public` key public hai — isko frontend mein use karna safe hai (yahi
+  Supabase ka tareeqa hai). Lekin **`service_role` key kabhi** use/share na karein.
+- Abhi koi bhi visitor score add/delete kar sakta hai. Agar baad mein sirf khud
+  ke liye lock karna ho (login/password), to bata dena — wo bhi laga denge.
+- Apna data dekhne ke liye Supabase mein **Table Editor → match_performances**
+  kholein.

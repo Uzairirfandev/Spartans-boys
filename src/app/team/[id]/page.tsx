@@ -1,253 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Calendar, Target, Award, TrendingUp, Shield, Zap, Users, Trophy, Star, ChevronRight } from "lucide-react";
+import { ArrowLeft, Calendar, Target, Award, TrendingUp, Shield, Zap, Users, Trophy, Star, Plus, Trash2, Cloud, HardDrive } from "lucide-react";
 import ClientOnly from "@/components/ClientOnly";
+import AddScoreModal from "@/components/AddScoreModal";
+import {
+  getMatches,
+  deleteMatch,
+  aggregateMatches,
+  combineStats,
+  isSharedMode,
+  type MatchRecord,
+} from "@/lib/matchStore";
 
-// Team member data (same as in AboutSection)
+// Team roster. All match stats start at 0 and fill up ONLY from real "Add Score"
+// entries on each player's page — no fake/placeholder numbers.
+const CRAIYON =
+  "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp";
+
+// Shared zero-stats so every player starts clean.
+const ZERO = {
+  country: "",
+  age: 0,
+  matches: 0,
+  runs: 0,
+  wickets: 0,
+  highestScore: 0,
+  average: 0,
+  strikeRate: 0,
+  centuries: 0,
+  halfCenturies: 0,
+  catches: 0,
+  bestBowling: "0/0",
+  economy: 0,
+};
+
 const teamMembers = [
-  {
-    id: 1,
-    name: "Barry",
-    role: "Batsman",
-    number: "96",
-    image: "/images/barry.jpeg",
-    country: "Team A",
-    age: 25,
-    matches: 120,
-    runs: 4500,
-    wickets: 15,
-    highestScore: 145,
-    average: 37.5,
-    strikeRate: 89.2,
-    centuries: 8,
-    halfCenturies: 32,
-    catches: 45,
-    bestBowling: "2/15",
-    economy: 4.8
-  },
-  {
-    id: 2,
-    name: "Batsman",
-    role: "Batsman",
-    number: "10",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team B",
-    age: 24,
-    matches: 100,
-    runs: 3800,
-    wickets: 8,
-    highestScore: 132,
-    average: 38.0,
-    strikeRate: 91.5,
-    centuries: 6,
-    halfCenturies: 28,
-    catches: 38,
-    bestBowling: "1/12",
-    economy: 5.2
-  },
-  {
-    id: 3,
-    name: "Berry",
-    role: "Bat/Spin",
-    number: "11",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team C",
-    age: 26,
-    matches: 90,
-    runs: 2800,
-    wickets: 45,
-    highestScore: 98,
-    average: 31.1,
-    strikeRate: 76.8,
-    centuries: 0,
-    halfCenturies: 18,
-    catches: 52,
-    bestBowling: "5/28",
-    economy: 3.9
-  },
-  {
-    id: 4,
-    name: "Hammad",
-    role: "Batsman",
-    number: "9",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team D",
-    age: 23,
-    matches: 80,
-    runs: 3200,
-    wickets: 5,
-    highestScore: 125,
-    average: 40.0,
-    strikeRate: 94.2,
-    centuries: 5,
-    halfCenturies: 22,
-    catches: 35,
-    bestBowling: "1/8",
-    economy: 6.1
-  },
-  {
-    id: 5,
-    name: "Uzair",
-    role: "Allrounder",
-    number: "17",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team E",
-    age: 27,
-    matches: 110,
-    runs: 3500,
-    wickets: 85,
-    highestScore: 112,
-    average: 31.8,
-    strikeRate: 82.5,
-    centuries: 3,
-    halfCenturies: 20,
-    catches: 48,
-    bestBowling: "4/32",
-    economy: 4.2
-  },
-  {
-    id: 6,
-    name: "Husanain",
-    role: "Batsman",
-    number: "4",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team F",
-    age: 22,
-    matches: 70,
-    runs: 2900,
-    wickets: 2,
-    highestScore: 118,
-    average: 41.4,
-    strikeRate: 96.8,
-    centuries: 4,
-    halfCenturies: 19,
-    catches: 28,
-    bestBowling: "1/25",
-    economy: 7.5
-  },
-  {
-    id: 7,
-    name: "Nouman",
-    role: "Batsman",
-    number: "9",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team G",
-    age: 28,
-    matches: 130,
-    runs: 5200,
-    wickets: 12,
-    highestScore: 156,
-    average: 40.0,
-    strikeRate: 87.3,
-    centuries: 10,
-    halfCenturies: 35,
-    catches: 58,
-    bestBowling: "2/18",
-    economy: 5.5
-  },
-  {
-    id: 8,
-    name: "Saeed",
-    role: "Bowler",
-    number: "5",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team H",
-    age: 26,
-    matches: 95,
-    runs: 450,
-    wickets: 142,
-    highestScore: 35,
-    average: 12.8,
-    strikeRate: 65.4,
-    centuries: 0,
-    halfCenturies: 0,
-    catches: 32,
-    bestBowling: "6/22",
-    economy: 3.6
-  },
-  {
-    id: 9,
-    name: "Saif",
-    role: "Allrounder",
-    number: "11",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team I",
-    age: 25,
-    matches: 85,
-    runs: 2100,
-    wickets: 68,
-    highestScore: 88,
-    average: 24.7,
-    strikeRate: 78.9,
-    centuries: 0,
-    halfCenturies: 12,
-    catches: 41,
-    bestBowling: "4/35",
-    economy: 4.5
-  },
-  {
-    id: 10,
-    name: "Umar",
-    role: "Bowler",
-    number: "8",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team J",
-    age: 24,
-    matches: 75,
-    runs: 320,
-    wickets: 98,
-    highestScore: 28,
-    average: 8.5,
-    strikeRate: 58.2,
-    centuries: 0,
-    halfCenturies: 0,
-    catches: 25,
-    bestBowling: "5/28",
-    economy: 4.1
-  },
-  {
-    id: 11,
-    name: "Ahmed",
-    role: "Allrounder",
-    number: "6",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team K",
-    age: 27,
-    matches: 105,
-    runs: 2900,
-    wickets: 76,
-    highestScore: 95,
-    average: 27.6,
-    strikeRate: 81.2,
-    centuries: 1,
-    halfCenturies: 15,
-    catches: 44,
-    bestBowling: "4/38",
-    economy: 4.8
-  },
-  {
-    id: 12,
-    name: "Player 12",
-    role: "Batsman",
-    number: "12",
-    image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp",
-    country: "Team L",
-    age: 26,
-    matches: 88,
-    runs: 3400,
-    wickets: 10,
-    highestScore: 108,
-    average: 38.6,
-    strikeRate: 85.9,
-    centuries: 3,
-    halfCenturies: 21,
-    catches: 36,
-    bestBowling: "2/22",
-    economy: 5.8
-  }
+  { id: 1, name: "Barry", role: "Batsman", number: "96", image: "/images/barry.jpeg", ...ZERO },
+  { id: 2, name: "Batsman", role: "Batsman", number: "10", image: CRAIYON, ...ZERO },
+  { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: CRAIYON, ...ZERO },
+  { id: 4, name: "Hammad", role: "Batsman", number: "9", image: CRAIYON, ...ZERO },
+  { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: CRAIYON, ...ZERO },
+  { id: 6, name: "Husanain", role: "Batsman", number: "4", image: CRAIYON, ...ZERO },
+  { id: 7, name: "Nouman", role: "Batsman", number: "9", image: CRAIYON, ...ZERO },
+  { id: 8, name: "Saeed", role: "Bowler", number: "5", image: CRAIYON, ...ZERO },
+  { id: 9, name: "Saif", role: "Allrounder", number: "11", image: CRAIYON, ...ZERO },
+  { id: 10, name: "Umar", role: "Bowler", number: "8", image: CRAIYON, ...ZERO },
+  { id: 11, name: "Ahmed", role: "Allrounder", number: "6", image: CRAIYON, ...ZERO },
+  { id: 12, name: "Player 12", role: "Batsman", number: "12", image: CRAIYON, ...ZERO },
 ];
 
 // Animated background lines
@@ -265,12 +67,45 @@ export default function TeamMemberDetail() {
   const params = useParams();
   const router = useRouter();
   const [member, setMember] = useState<typeof teamMembers[0] | null>(null);
+  const [matches, setMatches] = useState<MatchRecord[]>([]);
+  const [showAdd, setShowAdd] = useState(false);
+  const [shared, setShared] = useState(false);
+
+  const memberId = parseInt(params.id as string);
 
   useEffect(() => {
-    const memberId = parseInt(params.id as string);
     const foundMember = teamMembers.find(m => m.id === memberId);
     setMember(foundMember || null);
-  }, [params.id]);
+  }, [memberId]);
+
+  // Load this player's recorded matches (from Supabase or localStorage).
+  const loadMatches = useCallback(async () => {
+    try {
+      const rows = await getMatches(memberId);
+      setMatches(rows);
+    } catch (err) {
+      console.error("Could not load matches:", err);
+    }
+  }, [memberId]);
+
+  useEffect(() => {
+    setShared(isSharedMode());
+    loadMatches();
+  }, [loadMatches]);
+
+  const handleDeleteMatch = async (id: string) => {
+    try {
+      await deleteMatch(id);
+      setMatches((prev) => prev.filter((m) => m.id !== id));
+    } catch (err) {
+      console.error("Could not delete match:", err);
+    }
+  };
+
+  // Fold recorded matches into the base career stats so totals keep adding up.
+  const stats = member
+    ? combineStats(member, aggregateMatches(matches))
+    : null;
 
   const getRoleColor = (role: string) => {
     if (role.includes("Batsman")) return "from-blue-600 to-blue-800";
@@ -288,7 +123,7 @@ export default function TeamMemberDetail() {
     return <Award className="w-5 h-5" />;
   };
 
-  if (!member) {
+  if (!member || !stats) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-black/50 to-background text-white flex items-center justify-center">
         <div className="text-center">
@@ -349,17 +184,32 @@ export default function TeamMemberDetail() {
       </div>
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 py-12">
-        {/* Back Button */}
-        <motion.button
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors group"
-        >
-          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Team</span>
-        </motion.button>
+        {/* Top bar: Back + Add Score */}
+        <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
+          <motion.button
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-white/80 hover:text-white transition-colors group"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Team</span>
+          </motion.button>
+
+          <motion.button
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setShowAdd(true)}
+            className="flex items-center gap-2 bg-primary hover:bg-primary/80 text-white font-semibold px-5 py-2.5 rounded-full shadow-lg shadow-primary/30 transition-colors"
+          >
+            <Plus className="w-5 h-5" />
+            Add Score
+          </motion.button>
+        </div>
 
         {/* Main Content */}
         <div className="grid lg:grid-cols-3 gap-12">
@@ -402,14 +252,18 @@ export default function TeamMemberDetail() {
                     {member.name}
                   </h1>
                   <div className="space-y-2 text-white/70">
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      <span>{member.country}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      <span>Age: {member.age}</span>
-                    </div>
+                    {member.country ? (
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        <span>{member.country}</span>
+                      </div>
+                    ) : null}
+                    {member.age ? (
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>Age: {member.age}</span>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -428,16 +282,31 @@ export default function TeamMemberDetail() {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-white/70">Matches</span>
-                    <span className="font-bold text-xl">{member.matches}</span>
+                    <span className="font-bold text-xl">{stats.matches}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/70">Total Runs</span>
-                    <span className="font-bold text-xl">{member.runs.toLocaleString()}</span>
+                    <span className="font-bold text-xl">{stats.runs.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/70">Wickets</span>
-                    <span className="font-bold text-xl">{member.wickets}</span>
+                    <span className="font-bold text-xl">{stats.wickets}</span>
                   </div>
+                </div>
+
+                {/* Data mode badge */}
+                <div className="mt-5 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-white/50">
+                  {shared ? (
+                    <>
+                      <Cloud className="w-4 h-4 text-green-400" />
+                      <span>Online — sab ko dikhta hai</span>
+                    </>
+                  ) : (
+                    <>
+                      <HardDrive className="w-4 h-4 text-yellow-400" />
+                      <span>Sirf is browser mein (database set nahi)</span>
+                    </>
+                  )}
                 </div>
               </motion.div>
             </div>
@@ -460,38 +329,50 @@ export default function TeamMemberDetail() {
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-1">{member.highestScore}</div>
+                  <div className="text-3xl font-bold text-blue-400 mb-1">{stats.highestScore}</div>
                   <div className="text-white/70 text-sm">Highest Score</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-1">{member.average}</div>
+                  <div className="text-3xl font-bold text-green-400 mb-1">{stats.average}</div>
                   <div className="text-white/70 text-sm">Average</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-400 mb-1">{member.strikeRate}</div>
+                  <div className="text-3xl font-bold text-yellow-400 mb-1">{stats.strikeRate}</div>
                   <div className="text-white/70 text-sm">Strike Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">{member.centuries + member.halfCenturies}</div>
+                  <div className="text-3xl font-bold text-purple-400 mb-1">{stats.centuries + stats.halfCenturies}</div>
                   <div className="text-white/70 text-sm">50+ Scores</div>
                 </div>
               </div>
-              
-              {/* Centuries and Half-Centuries */}
+
+              {/* Fours & Sixes (from recorded matches) */}
               <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 rounded-lg p-4 border border-cyan-600/30 text-center">
+                  <div className="text-2xl font-bold text-cyan-400">{stats.fours}</div>
+                  <div className="text-white/70 text-sm mt-1">Total 4s</div>
+                </div>
+                <div className="bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-lg p-4 border border-pink-600/30 text-center">
+                  <div className="text-2xl font-bold text-pink-400">{stats.sixes}</div>
+                  <div className="text-white/70 text-sm mt-1">Total 6s</div>
+                </div>
+              </div>
+
+              {/* Centuries and Half-Centuries */}
+              <div className="mt-4 grid grid-cols-2 gap-4">
                 <div className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-lg p-4 border border-yellow-600/30">
                   <div className="flex items-center gap-2 mb-2">
                     <Star className="w-5 h-5 text-yellow-500" />
                     <span className="font-semibold">Centuries</span>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-400">{member.centuries}</div>
+                  <div className="text-2xl font-bold text-yellow-400">{stats.centuries}</div>
                 </div>
                 <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-lg p-4 border border-blue-600/30">
                   <div className="flex items-center gap-2 mb-2">
                     <Award className="w-5 h-5 text-blue-500" />
                     <span className="font-semibold">Half Centuries</span>
                   </div>
-                  <div className="text-2xl font-bold text-blue-400">{member.halfCenturies}</div>
+                  <div className="text-2xl font-bold text-blue-400">{stats.halfCenturies}</div>
                 </div>
               </div>
             </div>
@@ -506,19 +387,19 @@ export default function TeamMemberDetail() {
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-red-400 mb-1">{member.bestBowling}</div>
+                  <div className="text-3xl font-bold text-red-400 mb-1">{stats.bestBowling}</div>
                   <div className="text-white/70 text-sm">Best Bowling</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-400 mb-1">{member.economy}</div>
+                  <div className="text-3xl font-bold text-orange-400 mb-1">{stats.economy}</div>
                   <div className="text-white/70 text-sm">Economy Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">{member.wickets}</div>
+                  <div className="text-3xl font-bold text-purple-400 mb-1">{stats.wickets}</div>
                   <div className="text-white/70 text-sm">Total Wickets</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-1">{member.catches}</div>
+                  <div className="text-3xl font-bold text-green-400 mb-1">{stats.catches}</div>
                   <div className="text-white/70 text-sm">Catches</div>
                 </div>
               </div>
@@ -537,27 +418,27 @@ export default function TeamMemberDetail() {
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-white/70">Batting Performance</span>
-                    <span className="font-semibold">{Math.min(100, (member.average / 50) * 100)}%</span>
+                    <span className="font-semibold">{Math.round(Math.min(100, (stats.average / 50) * 100))}%</span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-3">
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: `${Math.min(100, (member.average / 50) * 100)}%` }}
+                      animate={{ width: `${Math.min(100, (stats.average / 50) * 100)}%` }}
                       transition={{ duration: 1, delay: 0.5 }}
                       className="h-full bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full"
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-white/70">Bowling Performance</span>
-                    <span className="font-semibold">{Math.min(100, (member.wickets / member.matches) * 20)}%</span>
+                    <span className="font-semibold">{Math.round(Math.min(100, (stats.wickets / stats.matches) * 20))}%</span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-3">
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: `${Math.min(100, (member.wickets / member.matches) * 20)}%` }}
+                      animate={{ width: `${Math.min(100, (stats.wickets / stats.matches) * 20)}%` }}
                       transition={{ duration: 1, delay: 0.7 }}
                       className="h-full bg-gradient-to-r from-red-600 to-orange-600 rounded-full"
                     />
@@ -567,12 +448,12 @@ export default function TeamMemberDetail() {
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-white/70">Fielding Performance</span>
-                    <span className="font-semibold">{Math.min(100, (member.catches / member.matches) * 25)}%</span>
+                    <span className="font-semibold">{Math.round(Math.min(100, (stats.catches / stats.matches) * 25))}%</span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-3">
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: `${Math.min(100, (member.catches / member.matches) * 25)}%` }}
+                      animate={{ width: `${Math.min(100, (stats.catches / stats.matches) * 25)}%` }}
                       transition={{ duration: 1, delay: 0.9 }}
                       className="h-full bg-gradient-to-r from-green-600 to-emerald-600 rounded-full"
                     />
@@ -581,32 +462,101 @@ export default function TeamMemberDetail() {
               </div>
             </div>
 
-            {/* Recent Achievements */}
+            {/* Match Records */}
             <div className="bg-black/40 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-yellow-600 to-yellow-800 rounded-lg flex items-center justify-center">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                Recent Achievements
-              </h2>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-yellow-600/10 to-orange-600/10 rounded-lg border border-yellow-600/20">
-                  <ChevronRight className="w-5 h-5 text-yellow-500" />
-                  <span>Man of the Match vs Team Rival</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 rounded-lg border border-blue-600/20">
-                  <ChevronRight className="w-5 h-5 text-blue-500" />
-                  <span>Century in Championship Final</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-lg border border-purple-600/20">
-                  <ChevronRight className="w-5 h-5 text-purple-500" />
-                  <span>Best Bowling Figures of the Season</span>
-                </div>
+              <div className="flex items-center justify-between mb-6 gap-3 flex-wrap">
+                <h2 className="text-2xl font-bold flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  Match Records
+                </h2>
+                <button
+                  onClick={() => setShowAdd(true)}
+                  className="flex items-center gap-2 bg-primary/90 hover:bg-primary text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Score
+                </button>
               </div>
+
+              {matches.length === 0 ? (
+                <div className="text-center py-10 text-white/50">
+                  <p className="mb-1">Abhi koi match record nahi hai.</p>
+                  <p className="text-sm">
+                    Upar &quot;Add Score&quot; dabakar pehla match add karein.
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto -mx-2">
+                  <table className="w-full text-sm min-w-[640px]">
+                    <thead>
+                      <tr className="text-white/50 text-left border-b border-white/10">
+                        <th className="py-3 px-2 font-medium">Date</th>
+                        <th className="py-3 px-2 font-medium">Opponent</th>
+                        <th className="py-3 px-2 font-medium text-center">Runs (B)</th>
+                        <th className="py-3 px-2 font-medium text-center">4s/6s</th>
+                        <th className="py-3 px-2 font-medium text-center">Bowling</th>
+                        <th className="py-3 px-2 font-medium text-center">Ct</th>
+                        <th className="py-3 px-2 font-medium text-right"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {matches.map((m) => (
+                        <tr
+                          key={m.id}
+                          className="border-b border-white/5 hover:bg-white/5 transition-colors"
+                        >
+                          <td className="py-3 px-2 text-white/70 whitespace-nowrap">
+                            {m.match_date}
+                          </td>
+                          <td className="py-3 px-2 text-white/90">{m.opponent}</td>
+                          <td className="py-3 px-2 text-center">
+                            <span className="font-bold text-blue-400">{m.runs}</span>
+                            <span className="text-white/40"> ({m.balls})</span>
+                          </td>
+                          <td className="py-3 px-2 text-center text-white/70">
+                            {m.fours}/{m.sixes}
+                          </td>
+                          <td className="py-3 px-2 text-center text-white/70">
+                            {m.wickets}-{m.runs_conceded}
+                            <span className="text-white/40">
+                              {" "}
+                              ({m.overs} ov)
+                            </span>
+                          </td>
+                          <td className="py-3 px-2 text-center text-white/70">
+                            {m.catches}
+                          </td>
+                          <td className="py-3 px-2 text-right">
+                            <button
+                              onClick={() => handleDeleteMatch(m.id)}
+                              className="text-white/40 hover:text-red-400 p-1 rounded transition-colors"
+                              aria-label="Delete match"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Add Score Modal */}
+      <AddScoreModal
+        playerId={member.id}
+        playerName={member.name}
+        open={showAdd}
+        onClose={() => setShowAdd(false)}
+        onAdded={loadMatches}
+      />
     </div>
   );
 }

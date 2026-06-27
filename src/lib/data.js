@@ -26,13 +26,14 @@ const setStorageData = (key, data) => {
 };
 
 // Initial data
+// Roster only — stats start at 0 and fill up from real "Add Score" entries.
 const initialTeamMembers = [
-  { id: 1, name: "Barry", role: "Batsman", number: "96", image: "/images/barry.jpeg", country: "Team A", age: 25, matches: 120, runs: 4500, wickets: 15 },
-  { id: 2, name: "Batsman", role: "Batsman", number: "10", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team B", age: 24, matches: 100, runs: 3800, wickets: 8 },
-  { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team C", age: 26, matches: 90, runs: 2800, wickets: 45 },
-  { id: 4, name: "Hammad", role: "Batsman", number: "9", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team D", age: 23, matches: 80, runs: 3200, wickets: 5 },
-  { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team E", age: 27, matches: 110, runs: 3500, wickets: 85 },
-  { id: 6, name: "Ali", role: "Bowler", number: "21", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "Team F", age: 25, matches: 95, runs: 1200, wickets: 110 },
+  { id: 1, name: "Barry", role: "Batsman", number: "96", image: "/images/barry.jpeg", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
+  { id: 2, name: "Batsman", role: "Batsman", number: "10", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
+  { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
+  { id: 4, name: "Hammad", role: "Batsman", number: "9", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
+  { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
+  { id: 6, name: "Ali", role: "Bowler", number: "21", image: "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp", country: "", age: 0, matches: 0, runs: 0, wickets: 0 },
 ];
 
 const initialVideos = [
@@ -83,20 +84,9 @@ const initialGrounds = [
     capacity: "25,000",
     established: "2010",
     stats: {
-      mostRuns: {
-        name: "Babar Azam",
-        runs: 3456,
-        matches: 28
-      },
-      mostWickets: {
-        name: "Shaheen Afridi",
-        wickets: 45,
-        matches: 22
-      },
-      manOfTheMatch: {
-        name: "Fakhar Zaman",
-        awards: 8
-      }
+      mostRuns: { name: "", runs: 0, matches: 0 },
+      mostWickets: { name: "", wickets: 0, matches: 0 },
+      manOfTheMatch: { name: "", awards: 0 }
     }
   },
   {
@@ -107,31 +97,20 @@ const initialGrounds = [
     capacity: "20,000",
     established: "2012",
     stats: {
-      mostRuns: {
-        name: "Fakhar Zaman",
-        runs: 2890,
-        matches: 24
-      },
-      mostWickets: {
-        name: "Haris Rauf",
-        wickets: 38,
-        matches: 19
-      },
-      manOfTheMatch: {
-        name: "Babar Azam",
-        awards: 6
-      }
+      mostRuns: { name: "", runs: 0, matches: 0 },
+      mostWickets: { name: "", wickets: 0, matches: 0 },
+      manOfTheMatch: { name: "", awards: 0 }
     }
   },
 ];
 
 const initialSkills = [
-  { id: 1, name: "Total Runs", value: 15480, suffix: "", color: "red" },
-  { id: 2, name: "Total Wickets", value: 342, suffix: "", color: "blue" },
-  { id: 3, name: "Matches Played", value: 286, suffix: "", color: "green" },
-  { id: 4, name: "Career Average", value: 54.12, suffix: "", color: "purple" },
-  { id: 5, name: "Best Score", value: 183, suffix: "", color: "yellow" },
-  { id: 6, name: "Strike Rate", value: 89.45, suffix: "", color: "orange" },
+  { id: 1, name: "Total Runs", value: 0, suffix: "", color: "red" },
+  { id: 2, name: "Total Wickets", value: 0, suffix: "", color: "blue" },
+  { id: 3, name: "Matches Played", value: 0, suffix: "", color: "green" },
+  { id: 4, name: "Career Average", value: 0, suffix: "", color: "purple" },
+  { id: 5, name: "Best Score", value: 0, suffix: "", color: "yellow" },
+  { id: 6, name: "Strike Rate", value: 0, suffix: "", color: "orange" },
 ];
 
 // Data management functions
