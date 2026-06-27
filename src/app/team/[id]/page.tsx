@@ -14,43 +14,11 @@ import {
   isSharedMode,
   type MatchRecord,
 } from "@/lib/matchStore";
+import { getPlayerById } from "@/lib/playerStore";
+import type { Player } from "@/lib/players";
 
-// Team roster. All match stats start at 0 and fill up ONLY from real "Add Score"
-// entries on each player's page — no fake/placeholder numbers.
-const CRAIYON =
-  "https://media.craiyon.com/2025-08-20/brGLvX9aQaOpNjSJ6XWRUg.webp";
-
-// Shared zero-stats so every player starts clean.
-const ZERO = {
-  country: "",
-  age: 0,
-  matches: 0,
-  runs: 0,
-  wickets: 0,
-  highestScore: 0,
-  average: 0,
-  strikeRate: 0,
-  centuries: 0,
-  halfCenturies: 0,
-  catches: 0,
-  bestBowling: "0/0",
-  economy: 0,
-};
-
-const teamMembers = [
-  { id: 1, name: "Barry", role: "Batsman", number: "96", image: "/images/barry.jpeg", ...ZERO },
-  { id: 2, name: "Batsman", role: "Batsman", number: "10", image: CRAIYON, ...ZERO },
-  { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: CRAIYON, ...ZERO },
-  { id: 4, name: "Hammad", role: "Batsman", number: "9", image: CRAIYON, ...ZERO },
-  { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: CRAIYON, ...ZERO },
-  { id: 6, name: "Husanain", role: "Batsman", number: "4", image: CRAIYON, ...ZERO },
-  { id: 7, name: "Nouman", role: "Batsman", number: "9", image: CRAIYON, ...ZERO },
-  { id: 8, name: "Saeed", role: "Bowler", number: "5", image: CRAIYON, ...ZERO },
-  { id: 9, name: "Saif", role: "Allrounder", number: "11", image: CRAIYON, ...ZERO },
-  { id: 10, name: "Umar", role: "Bowler", number: "8", image: CRAIYON, ...ZERO },
-  { id: 11, name: "Ahmed", role: "Allrounder", number: "6", image: CRAIYON, ...ZERO },
-  { id: 12, name: "Player 12", role: "Batsman", number: "12", image: CRAIYON, ...ZERO },
-];
+// Player roster now lives in src/lib/players.ts and is merged with added
+// players via playerStore.getPlayerById().
 
 // Animated background lines
 const smallLines = Array.from({ length: 30 }, (_, i) => ({
@@ -66,7 +34,8 @@ const smallLines = Array.from({ length: 30 }, (_, i) => ({
 export default function TeamMemberDetail() {
   const params = useParams();
   const router = useRouter();
-  const [member, setMember] = useState<typeof teamMembers[0] | null>(null);
+  const [member, setMember] = useState<Player | null>(null);
+  const [loadingMember, setLoadingMember] = useState(true);
   const [matches, setMatches] = useState<MatchRecord[]>([]);
   const [showAdd, setShowAdd] = useState(false);
   const [shared, setShared] = useState(false);
@@ -74,8 +43,19 @@ export default function TeamMemberDetail() {
   const memberId = parseInt(params.id as string);
 
   useEffect(() => {
-    const foundMember = teamMembers.find(m => m.id === memberId);
-    setMember(foundMember || null);
+    let alive = true;
+    setLoadingMember(true);
+    getPlayerById(memberId)
+      .then((found) => {
+        if (alive) setMember(found);
+      })
+      .catch((err) => console.error("Could not load player:", err))
+      .finally(() => {
+        if (alive) setLoadingMember(false);
+      });
+    return () => {
+      alive = false;
+    };
   }, [memberId]);
 
   // Load this player's recorded matches (from Supabase or localStorage).
@@ -122,6 +102,14 @@ export default function TeamMemberDetail() {
     if (role.includes("Bat/Spin")) return <Target className="w-5 h-5" />;
     return <Award className="w-5 h-5" />;
   };
+
+  if (loadingMember) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-black/50 to-background text-white flex items-center justify-center">
+        <p className="text-white/60">Loading player...</p>
+      </div>
+    );
+  }
 
   if (!member || !stats) {
     return (

@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Eye, Calendar, Target, Award, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { dataManager } from "@/lib/data";
+import { getPlayers } from "@/lib/playerStore";
+import { BASE_PLAYERS, type Player } from "@/lib/players";
 import { useInView } from "framer-motion";
 import ClientOnly from "./ClientOnly";
 
@@ -13,21 +14,21 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [teamMembers, setTeamMembers] = useState(dataManager.getTeamMembers());
+  const [teamMembers, setTeamMembers] = useState<Player[]>(BASE_PLAYERS);
   const router = useRouter();
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
-  // Refresh data when component mounts and set up interval for auto-refresh
+  // Load players (base squad + any added players) from the shared store.
   useEffect(() => {
-    // Initial data load
-    setTeamMembers(dataManager.getTeamMembers());
-    
-    // Set up interval to check for data changes every 2 seconds
-    const interval = setInterval(() => {
-      setTeamMembers(dataManager.getTeamMembers());
-    }, 2000);
-    
-    return () => clearInterval(interval);
+    let alive = true;
+    getPlayers()
+      .then((rows) => {
+        if (alive) setTeamMembers(rows);
+      })
+      .catch((err) => console.error("Could not load players:", err));
+    return () => {
+      alive = false;
+    };
   }, []);
 
   // 40 small fast-moving lines — brighter & sharper (same as Hero)
@@ -221,7 +222,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mt-6"
           >
-            Meet our talented squad of 12 cricket stars who bring their unique skills
+            Meet our talented squad of {teamMembers.length} cricket stars who bring their unique skills
             and passion to the game.
           </motion.p>
         </motion.div>
@@ -362,13 +363,14 @@ export default function AboutSection() {
           transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
           className="text-center mt-12"
         >
-          <motion.button 
+          <motion.button
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 1.5 }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
+            onClick={() => router.push("/squad")}
             className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all group"
           >
             View Full Squad
