@@ -299,7 +299,7 @@ export default function TeamMemberDetail() {
                   {shared ? (
                     <>
                       <Cloud className="w-4 h-4 text-green-400" />
-                      <span>Online — sab ko dikhta hai</span>
+                      <span>Online</span>
                     </>
                   ) : (
                     <>
