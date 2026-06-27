@@ -214,9 +214,11 @@ export default function TeamMemberDetail() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                 <div className="relative bg-black/40 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
                   {/* Jersey Number */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-3xl font-bold shadow-2xl">
-                    {member.number}
-                  </div>
+                  {member.number ? (
+                    <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-3xl font-bold shadow-2xl">
+                      {member.number}
+                    </div>
+                  ) : null}
 
                   {/* Player Image */}
                   <div className="relative mb-6">

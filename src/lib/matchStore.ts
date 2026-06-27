@@ -138,6 +138,7 @@ export async function deleteMatch(id: string): Promise<void> {
 
 export type Aggregate = {
   count: number;
+  battedInnings: number; // records where the player actually batted
   runs: number;
   balls: number;
   fours: number;
@@ -156,6 +157,7 @@ export type Aggregate = {
 export function aggregateMatches(matches: MatchRecord[]): Aggregate {
   const agg: Aggregate = {
     count: matches.length,
+    battedInnings: 0,
     runs: 0,
     balls: 0,
     fours: 0,
@@ -171,6 +173,7 @@ export function aggregateMatches(matches: MatchRecord[]): Aggregate {
   };
 
   for (const m of matches) {
+    if (m.balls > 0 || m.runs > 0) agg.battedInnings += 1;
     agg.runs += m.runs;
     agg.balls += m.balls;
     agg.fours += m.fours;
@@ -249,9 +252,10 @@ export function combineStats(base: BaseStats, agg: Aggregate): CombinedStats {
   const strikeRate =
     totalBalls > 0 ? round1((runs / totalBalls) * 100) : base.strikeRate;
 
-  // Average: seed the base's implied innings (each recorded match = 1 innings).
+  // Average: runs per innings the player actually batted (ignores bowling-only
+  // matches). Base's implied innings are seeded from its own average.
   const baseInnings = base.average > 0 ? base.runs / base.average : base.matches;
-  const totalInnings = baseInnings + agg.count;
+  const totalInnings = baseInnings + agg.battedInnings;
   const average = totalInnings > 0 ? round1(runs / totalInnings) : base.average;
 
   // Economy: weight the base economy by its implied overs (proxy = base matches)

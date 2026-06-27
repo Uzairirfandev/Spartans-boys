@@ -41,20 +41,25 @@ export type Player = PlayerIdentity & typeof ZERO_STATS;
 // Roles offered in the Add Player form.
 export const ROLES = ["Batsman", "Bowler", "Allrounder", "Bat/Spin"];
 
-// Original squad (ids 1–12). Added players get ids 100+ so they never clash.
+// Squad (ids 1–16). Added players get ids 100+ so they never clash.
+// Photos are placeholders (default Spartan) — user adds real ones later.
 const ROSTER: PlayerIdentity[] = [
-  { id: 1, name: "Barry", role: "Batsman", number: "96", image: "/images/barry.jpeg" },
-  { id: 2, name: "Batsman", role: "Batsman", number: "10", image: SPARTAN_IMG },
-  { id: 3, name: "Berry", role: "Bat/Spin", number: "11", image: SPARTAN_IMG },
-  { id: 4, name: "Hammad", role: "Batsman", number: "9", image: SPARTAN_IMG },
-  { id: 5, name: "Uzair", role: "Allrounder", number: "17", image: SPARTAN_IMG },
-  { id: 6, name: "Husanain", role: "Batsman", number: "4", image: SPARTAN_IMG },
-  { id: 7, name: "Nouman", role: "Batsman", number: "9", image: SPARTAN_IMG },
-  { id: 8, name: "Saeed", role: "Bowler", number: "5", image: SPARTAN_IMG },
-  { id: 9, name: "Saif", role: "Allrounder", number: "11", image: SPARTAN_IMG },
-  { id: 10, name: "Umar", role: "Bowler", number: "8", image: SPARTAN_IMG },
-  { id: 11, name: "Ahmed", role: "Allrounder", number: "6", image: SPARTAN_IMG },
-  { id: 12, name: "Player 12", role: "Batsman", number: "12", image: SPARTAN_IMG },
+  { id: 1, name: "Husnain", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 2, name: "Barry", role: "Allrounder", number: "", image: SPARTAN_IMG },
+  { id: 3, name: "Hammad", role: "Allrounder", number: "", image: SPARTAN_IMG },
+  { id: 4, name: "Ahmed", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 5, name: "Uzair", role: "Allrounder", number: "", image: SPARTAN_IMG },
+  { id: 6, name: "Saeed", role: "Allrounder", number: "", image: SPARTAN_IMG },
+  { id: 7, name: "Berry", role: "Allrounder", number: "", image: SPARTAN_IMG },
+  { id: 8, name: "Numan", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 9, name: "Azan", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 10, name: "Saif", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 11, name: "Umer", role: "Bowler", number: "", image: SPARTAN_IMG },
+  { id: 12, name: "Bilal", role: "Bowler", number: "", image: SPARTAN_IMG },
+  { id: 13, name: "Amir", role: "Bowler", number: "", image: SPARTAN_IMG },
+  { id: 14, name: "Salwan", role: "Batsman", number: "", image: SPARTAN_IMG },
+  { id: 15, name: "Saboor", role: "Bowler", number: "", image: SPARTAN_IMG },
+  { id: 16, name: "Hamza", role: "Bowler", number: "", image: SPARTAN_IMG },
 ];
 
 // Attach zeroed stats to an identity to make a full Player.
